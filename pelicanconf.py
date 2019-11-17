@@ -8,7 +8,7 @@ if os.environ.get("BLOG_DEV") == "YES":
     SITEURL = "http://localhost:8000/"
 
 elif os.environ.get("BLOG_DEV") == "NO":
-    SITEURL = "https://rached.github.io/"
+    SITEURL = "https://reachip.github.io"
     RELATIVE_URLS = False
 
 else:
