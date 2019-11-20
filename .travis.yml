@@ -14,7 +14,7 @@ deploy:
     provider: pages
     verbose: true
     local_dir: "output/"
-    token: $GITHUB_TOKEN
+    github_token: $GITHUB_TOKEN
     keep_history: true
     target_branch: master
     on:
