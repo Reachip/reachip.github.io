@@ -72,6 +72,7 @@ SOCIAL = (
     ("twitter", "https://twitter.com/SirRached"),
     ("envelope", "mailto:r.mejri74100@gmail.com"),
     ("github", "https://github.com/Reachip"),
+    ("linkedin", "https://www.linkedin.com/in/rached-mejri")
 )
 SITESUBTITLE = "Lycéen écrivant du code gargouilleux à en devenir coquefredouille."
 DEFAULT_PAGINATION = 10
