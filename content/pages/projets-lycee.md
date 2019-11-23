@@ -10,6 +10,23 @@ Il s'agissait de concevoir un pupitre qui joue une animation lumineuse tout en j
 
 [Télécharger/consulter le document en cliquant ici](https://drive.google.com/file/d/1m4awL6zsS3xNTEIA9iEwlT4Zf_mcaJMD/view?usp=sharing)
 
-## A venir
+## Projet de terminal STI2D 2019/2020
 
-Un autre projet dans le cadre de mon entrée en terminal STI2D est en cours de réflexion, plus d'infos sont à venir le jour ou ce probable projet sera validé.
+Le projet EatWas est un projet visant à recommander des repas à ces utilisateurs en fonction de leur objectif, de leurs dépenses journalières et de l'environnement.
+
+Ce projet propose donc à l'utilisateur une application mobile multi-plateforme développé à l'aide de React Native et d'un bracelet pouvant se connecter à cette application mobile afin de calculer les dépenses journalières de l'individu en question.
+
+Je suis alors chargé de développer l'application mobile qui découle de plusieurs entité-es à développer :
+
+- Le développement d'un service à style d'architecture web REST permettant **l'aquisition**, **traitement** et **transmission** des données de l'utilisateur.
+- Le développement de l'application mobile afin **communiquer** les informations à l'utilisateur depuis son smartphone.
+- Le développement d'un module Python permettant de simplifier l'utilisation tableau Excel du Docteur Jean-Michel Cohen qui répertorie la plupart des nutriments de plusieurs centaines d'aliments. Ce sous-projet est disponible à cette adresse : [https://github.com/Reachip/cssw](https://github.com/Reachip/cssw)
+
+J'utilise pour le développement du serveur (service REST) le langage Python couplé au très bon framework aiohttp, à l'ORM tortoise, postgresql ou encore pyjwt. L'ensemble du programme est hebérgé sur un Raspberry PI de mon lycée. Au niveau de l'application mobile, j'utilise le bien pratique framework React Native, notamment pour sa facilité d'apprentissage et le portage de code d'une plateforme à l'autre sans contraintes.
+
+Finalement, j'ai crée un module Python nommé CSSW (Cohen Spread Sheet Wrapper) en langage Python via les modules lxdr et requests.
+
+
+
+
+

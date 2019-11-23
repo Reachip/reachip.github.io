@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 import os
 
 if os.environ.get("BLOG_DEV") == "YES":
-    SITEURL = "http://localhost:8000/"
+    SITEURL = "http://localhost:8000"
 
 elif os.environ.get("BLOG_DEV") == "NO":
     SITEURL = "https://reachip.github.io"
@@ -37,7 +37,7 @@ if GOOGLE_ANALYTICS is None:
     )
 
 AUTHOR = "Rached MEJRI"
-SITENAME = "Sir Rached"
+SITENAME = "Rached Mejri"
 SITEDESCRIPTION = "Lycéen écrivant du code gargouilleux à en devenir coquefredouille."
 DISABLE_URL_HASH = False
 RELATED_POSTS_MAX = 2
