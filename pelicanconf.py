@@ -65,7 +65,23 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 USE_FOLDER_AS_CATEGORY = True
-
+PLUGINS = [
+    'extended_sitemap'
+]
+EXTENDED_SITEMAP_PLUGIN = {
+    'priorities': {
+        'index': 1.0,
+        'articles': 0.8,
+        'pages': 0.5,
+        'others': 0.4
+    },
+    'changefrequencies': {
+        'index': 'daily',
+        'articles': 'weekly',
+        'pages': 'monthly',
+        'others': 'monthly',
+    }
+}
 SHOW_SOCIAL_ON_INDEX_PAGE_HEADER = True
 SOCIAL = (
     ("gitlab", "https://gitlab.com/reachip"),
