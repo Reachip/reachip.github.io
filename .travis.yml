@@ -12,7 +12,7 @@ script:
 deploy:
     provider: pages
     verbose: true
-    local-dir: output
+    local-dir: ./output
     github_token: $TOKEN
     keep_history: true
     target_branch: master
