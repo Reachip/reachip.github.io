@@ -19,7 +19,7 @@
   {% endif %}
 
   {% if USE_GOOGLE_FONTS != False %}
-  <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
   {% endif %}
 
   {% if USE_LESS %}
@@ -111,8 +111,6 @@
       <h1><a href="{{ SITEURL }}">{{ SITETITLE }}</a></h1>
       {% if SITESUBTITLE %}<p>{{ SITESUBTITLE }}</p>{% endif %}
       {% if pages or LINKS %}
-      <img src="{{ SITEURL }}/images/pipeline.svg" alt="information de l'état responsive du site"
-        style="border-radius: 0%;">
       <img src="https://travis-ci.org/Reachip/reachip.github.io.svg?branch=develop" alt="etat du build sur Travis CI"
         style="border-radius: 0%;">
       <nav>
