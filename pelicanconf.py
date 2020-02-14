@@ -28,7 +28,7 @@ THEME = "./themes/flex"
 DISQUS_SITENAME = "http://reachip.github.io/"
 USE_LESS = True
 USE_GOOGLE_FONTS = True
-SITELOGO = f"{SITEURL}/images/dog.jpg"
+SITELOGO = "https://avatars0.githubusercontent.com/u/26501917?s=460&v=4"
 GOOGLE_ANALYTICS = os.environ.get("GOOGLE_AN")
 
 if GOOGLE_ANALYTICS is None:
@@ -43,11 +43,12 @@ DISABLE_URL_HASH = False
 RELATED_POSTS_MAX = 2
 OG_LOCALE = "fr_FR"
 LOCALE = "fr_FR"
-FAVICON = SITEURL + "images/dog.jpg"
+FAVICON = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/GNOME_Terminal_icon_2019.svg/128px-GNOME_Terminal_icon_2019.svg.png"
 GITHUB_CORNER_URL = "https://github.com/Reachip/reachip.github.io"
 I18N_TEMPLATES_LANG = "fr"
 STATIC_PATHS = ["images"]
-BROWSER_COLOR = "#242121"
+CC_LICENSE = True
+BROWSER_COLOR = "#090a0b"
 ROBOTS = "index, follow"
 PYGMENTS_STYLE = "monokai"
 COPYRIGHT_NAME = "Rached MEJRI"
