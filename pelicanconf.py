@@ -36,7 +36,7 @@ if GOOGLE_ANALYTICS is None:
         "Jeton de Google Analytics non fourni dans la variable d'environnement GOOGLE_AN !"
     )
 
-AUTHOR = "Rached MEJRI"
+AUTHOR = "Rached Mejri"
 SITENAME = "Rached"
 SITEDESCRIPTION = "Lycéen écrivant du code gargouilleux à en devenir coquefredouille."
 DISABLE_URL_HASH = False
@@ -51,7 +51,7 @@ CC_LICENSE = True
 BROWSER_COLOR = "#090a0b"
 ROBOTS = "index, follow"
 PYGMENTS_STYLE = "monokai"
-COPYRIGHT_NAME = "Rached MEJRI"
+COPYRIGHT_NAME = "Rached Mejri"
 DISQUS_SITENAME = "sir-rached"
 PATH = "content"
 TIMEZONE = "Europe/Paris"
@@ -91,7 +91,7 @@ SOCIAL = (
     ("github", "https://github.com/Reachip"),
     ("linkedin", "https://www.linkedin.com/in/rached-mejri")
 )
-SITESUBTITLE = "Blog d'un lycéen de terminal STI2D SIN, utilisateur de Linux, Python et Rust en ce qui concerne l'informatique"
+SITESUBTITLE = "Utilisateur de Linux, Python et Rust en ce qui concerne l'informatique"
 DEFAULT_PAGINATION = 10
 AUTHOR_BIO = "Blog d'un lycéen de terminal STI2D SIN, utilisateur de Linux, Python et Rust en ce qui concerne l'informatique"
 GITHUB_URL = "https://github.com/Reachip"
