@@ -37,7 +37,7 @@ if GOOGLE_ANALYTICS is None:
     )
 
 AUTHOR = "Rached MEJRI"
-SITENAME = "Rached Mejri"
+SITENAME = "Rached"
 SITEDESCRIPTION = "Lycéen écrivant du code gargouilleux à en devenir coquefredouille."
 DISABLE_URL_HASH = False
 RELATED_POSTS_MAX = 2
@@ -91,7 +91,7 @@ SOCIAL = (
     ("github", "https://github.com/Reachip"),
     ("linkedin", "https://www.linkedin.com/in/rached-mejri")
 )
-SITESUBTITLE = "Lycéen écrivant du code gargouilleux à en devenir coquefredouille."
+SITESUBTITLE = "Blog d'un lycéen de terminal STI2D SIN, utilisateur de Linux, Python et Rust en ce qui concerne l'informatique"
 DEFAULT_PAGINATION = 10
-AUTHOR_BIO = "Blog perso d'un lycéen en première STI2D SIN accesoirement utilisateur de Python et Rust en ce qui concerne l'informatique"
+AUTHOR_BIO = "Blog d'un lycéen de terminal STI2D SIN, utilisateur de Linux, Python et Rust en ce qui concerne l'informatique"
 GITHUB_URL = "https://github.com/Reachip"
