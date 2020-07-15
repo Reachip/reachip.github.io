@@ -54,7 +54,7 @@ regenerate:
 	$(PELICAN) -r $(INPUTDIR) -o $(OUTPUTDIR) -s $(CONFFILE) $(PELICANOPTS)
 
 deploy: clean html
-	ghp-import -r origin -b master output/
+	ghp-import -r origin -b master output/ --message="Update website"
 	git push origin master
 
 serve:
