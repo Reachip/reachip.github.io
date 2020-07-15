@@ -85,11 +85,9 @@ EXTENDED_SITEMAP_PLUGIN = {
 }
 SHOW_SOCIAL_ON_INDEX_PAGE_HEADER = True
 SOCIAL = (
-    ("gitlab", "https://gitlab.com/reachip"),
     ("twitter", "https://twitter.com/SirRached"),
     ("envelope", "mailto:r.mejri74100@gmail.com"),
     ("github", "https://github.com/Reachip"),
-    ("linkedin", "https://www.linkedin.com/in/rached-mejri")
 )
 SITESUBTITLE = "Utilisateur de Linux, Python et Rust en ce qui concerne l'informatique"
 DEFAULT_PAGINATION = 10
