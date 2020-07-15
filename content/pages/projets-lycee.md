@@ -1,5 +1,6 @@
 Title: Projets scolaires
 Slug: projets-scolaires
+<!---
 ## Projet pupitre
 
 Ci-contre l'écrit qui explique de A à Z le projet que j'ai dû effectuer l'an dernier en tant qu'élève de première STI2D.
@@ -26,7 +27,7 @@ J'utilise pour le développement du serveur (service REST) le langage Python cou
 
 Finalement, j'ai crée un module Python nommé CSSW (Cohen Spread Sheet Wrapper) en langage Python via les modules lxdr et requests.
 
-
+-->
 
 
 
