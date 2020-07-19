@@ -38,7 +38,7 @@ if GOOGLE_ANALYTICS is None:
 
 AUTHOR = "Rached Mejri"
 SITENAME = "Rached"
-SITEDESCRIPTION = "Lycéen écrivant du code gargouilleux à en devenir coquefredouille."
+SITEDESCRIPTION = "Blog d'un étudiant, utilisateur de Linux, Python et Rust en ce qui concerne l'informatique."
 DISABLE_URL_HASH = False
 RELATED_POSTS_MAX = 2
 OG_LOCALE = "fr_FR"
