@@ -11,11 +11,12 @@ Bon de base c'était un projet pour le fun mais je me suis dis que ça pourrait 
 
 Bonsoir peuple de France et de Navarre. Ce soir on va pratiquer l'asynchronisme en langage Python. J'avais déjà écrit une page dessus que vous pouvez retrouver <a href="https://reachip.github.io/lasynchronisme-avec-python.html">en cliquant ici</a>.
 
-C'était un pavé de théorie avec un petit exemple à la fin avec quelques sous-entendus grosophobe donc j'ai décidé d'écrire cette présente page pour expliquer le concept avec d'avantage de pratique et un soupçon de déviance zoophile.
+C'était un pavé de théorie avec un petit exemple à la fin avec quelques sous-entendus grosophobe donc j'ai décidé d'écrire cette présente page pour expliquer le concept avec d'avantage de pratique pour le plus grand plaisir des gens avec un soupçon de déviance zoophile.
+
 
 # Déjà qu'est ce que E621
 
-E621 est un site de partage d'images, qualifiées parfois d'oeuvres basées le thème du furry. Pour faire simple c'est de la pornographie zoophile masqué par des images aux allures de dessins animés.
+E621 est un site de partage d'images, qualifiées parfois d'oeuvres basées le thème du furry. Pour faire simple c'est de la pornographie zoophile masqué par des images aux allures de dessins animés. Je remercie un certain **ǤŦҠ#2548** pour m'avoir fait découvert cette atrocité.
 
 ![](https://image.noelshack.com/fichiers/2019/44/3/1572460473-screenshot-2019-10-30-e621.png)
 
