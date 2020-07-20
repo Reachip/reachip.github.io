@@ -1,7 +1,7 @@
 Title: Programmer ou coder
 Date: 2019-04-08
 Author: Rached MEJRI
-Tags: random, opinion, idées, thèse
+Tags: random, idées
 Slug: programmer-ou-coder
 Summary: Une opinion sur la programmation en général.
 
