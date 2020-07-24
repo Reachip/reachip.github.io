@@ -46,7 +46,8 @@ Python nous permet de lancer un thread sur une fonction en utilisant la méthode
 
 ## Let's code
 
-**NB :** Pensez à importer toutes les dépendances nécessaires au début du script :
+**NB :** Pensez à importer toutes les dépendances nécessaires au début du script.
+
 **NB2 :** Libre à vous de créer un fichier de logs pour visualiser  les actions effectuées au fil du temps lorsque que le code adopte une logique asynchrone.
 
 ```python

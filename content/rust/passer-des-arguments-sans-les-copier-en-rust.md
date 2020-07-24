@@ -1,9 +1,9 @@
-Title: Passer des arguments sans les copier en langage Rust.
+Title: Passer des arguments sans les copier en langage Rust
 Date: 2019-08-27
 Author: Rached MEJRI
 Tags: rust, programmation
 Slug: passage-argument-rust
-Summary: Sans copier-coller
+Summary: Sans copier-coller.
 
 Rust répond à besoin, celui de vouloir développer des programmes performants (entre autre). Qui dit performance dit économie de mémoire vive et pour cela, Rust utilise deux concepts : Le passage par référence et la sémantique de mouvement. Respectivement, la deuxième méthode est utilisé implicitement quand l'objet passé en argument n'implémente pas le trait <a href="https://doc.rust-lang.org/std/marker/trait.Copy.html">Copy</a> qui comme son nom l'indique **permet de copier la valeur émise à la fonction cible**.
 
