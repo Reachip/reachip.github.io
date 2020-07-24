@@ -91,5 +91,5 @@ SOCIAL = (
 )
 SITESUBTITLE = "Utilisateur de Linux, Python et Rust en ce qui concerne l'informatique"
 DEFAULT_PAGINATION = 10
-AUTHOR_BIO = "Blog d'un lycéen de terminal STI2D SIN, utilisateur de Linux, Python et Rust en ce qui concerne l'informatique"
+AUTHOR_BIO = "Utilisateur de Linux, Python et Rust en ce qui concerne l'informatique"
 GITHUB_URL = "https://github.com/Reachip"
