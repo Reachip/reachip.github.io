@@ -85,7 +85,6 @@ EXTENDED_SITEMAP_PLUGIN = {
 }
 SHOW_SOCIAL_ON_INDEX_PAGE_HEADER = True
 SOCIAL = (
-    ("twitter", "https://twitter.com/SirRached"),
     ("envelope", "mailto:r.mejri74100@gmail.com"),
     ("github", "https://github.com/Reachip"),
 )
