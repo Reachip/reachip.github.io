@@ -106,4 +106,38 @@ Si on peut faire une requête de type GET, on peut aussi faire des requêtes POS
 
 Pour cela, il vous faut une autorisation de la part de l'API, généralement légitimée par l'obtention d'un jeton (un peu comme un mot de passe) à fournir à l'API avant chaque requêtes pour prouver que c'est bien vous.
 
-// TODO
+## Requête POST
+
+Avec ce type de requête, on "poste" nos informations au serveur (et oui). La requête est généralement envoyée sous le format ```application/x-www-form-urlencoded``` : 
+
+```http
+POST / HTTP/1.1
+Host: https://reachip.github.io/e621/figurines/order/client?id=123
+Content-Type: application/x-www-form-urlencoded
+
+client=Loan&payement=espece
+```
+
+Rien n'empêche d'envoyer la donnée sous un autre format, par exemple en json en précisant au niveau du content-type ```application/json```.
+
+
+## Requête PUT
+
+Même structure mais conceptuellement, au lieu de poster une nouvelle donnée, on modifie une donnée existante sur le serveur.
+
+
+```http
+PUT / HTTP/1.1
+Host: https://reachip.github.io/e621/figurines/order/client?id=123
+Content-Type: application/x-www-form-urlencoded
+
+client=Loan&payement=nature
+```
+
+## Requête DELETE
+
+Elle sert à demander la suppression d'une donnée.
+
+```
+DELETE /e621/figurines/order/client?id=123 HTTP/1.1 
+```
