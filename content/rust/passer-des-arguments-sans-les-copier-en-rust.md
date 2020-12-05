@@ -15,9 +15,6 @@ Voyons ça un peu plus en détail.
 
 Le trait Copy permet de copier une valeur émise, on le trouve <a href="https://doc.rust-lang.org/std/marker/trait.Copy.html#implementors">dans toutes les primitives du langage</a>.
 
-<div class="tenor-gif-embed" data-postid="14774210" data-share-method="host" data-width="100%" data-aspect-ratio="1.3351206434316354"><a href="https://tenor.com/view/copy-ninja-kakashi-sharingan-gif-14774210">Copy Ninja Kakashi GIF</a> from <a href="https://tenor.com/search/copyninja-gifs">Copyninja GIFs</a></div><script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-
-
 Prenons un primitif : <a href="https://doc.rust-lang.org/std/primitive.usize.html">usize</a> et créeons une variable nommée *X* pour commencer.
 
 ```rust
