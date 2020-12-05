@@ -16,7 +16,7 @@ Toutes ces données sont généralement récupérables depuis un serveur HTTP ma
 # API de type "REST"
 
 "REST" entre trop guillemets car c'est une façon de faire des API pour le web de manière très subjective.
-poru
+
 D'après Wikipedia :
 
 > REST (representational state transfer) est un style d'architecture logicielle définissant un ensemble de contraintes à utiliser 
@@ -31,7 +31,7 @@ Disons que je veuille récupérer le nombre de cas infectés par le COVID-19 en 
 
 En cherchant dans la doc, on m'indique que pour récupérer le nombre de cas en France dans plusieurs régions, il faut que je fasse une requête à l'adresse : <a href="https://api.covid19api.com/dayone/country/france/status/confirmed">https://api.covid19api.com/dayone/country/france/status/confirmed</a>
 
-En fessant une requête avec curl, on obtient (en gros) : 
+En faisant une requête avec curl, on obtient (en gros) : 
 ```bash
 curl -v https://api.covid19api.com/dayone/country/france/status/confirmed
 ```
