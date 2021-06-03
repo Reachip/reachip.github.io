@@ -18,7 +18,7 @@ else:
 
 ARTICLE_URL = "articles/{lang}/{slug}.html"
 ARTICLE_SAVE_AS = "articles/{lang}/{slug}.html"
-
+DISPLAY_PAGES_ON_MENU = False
 PAGE_URL = "annexe/{slug}.html"
 PAGE_SAVE_AS = "annexe/{slug}.html"
 
