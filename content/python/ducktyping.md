@@ -5,6 +5,8 @@ Tags: python, tuto
 Slug: quest-ce-que-le-duck-typing
 Summary: Si ça ressemble à un canard, si ça nage comme un canard et si ça cancane comme un canard, c'est un canard.
 
+<img src="https://cdn.discordapp.com/attachments/486486669474660362/862405006657323088/W8o5DptYUCuD-gklFUmU_YGZmCiT1LoSuoId5eI8AsA.png" style="display: block; margin-left: auto; margin-right: auto" />
+
 Au risque de contrarier la communauté vegan, on va encore parler de canard dans cet article.
 Si vous n'avez pas vu le précédent article sur les principes SOLID, ça se passe ici : <a href="https://reachip.github.io/articles/fr/concevoir-du-code-solid.html">https://reachip.github.io/articles/fr/concevoir-du-code-solid.html</a>
 
