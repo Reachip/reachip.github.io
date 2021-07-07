@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta name="google-site-verification" content="iDUS_oNkci5GYtDQyc0iwcib37Mmw6NKIAhmqq5A_V4" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">   <link rel="stylesheet/less" type="text/css" href="https://reachip.github.io/theme/stylesheet/style.less">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css"
+    href="https://reachip.github.io/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="https://reachip.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://reachip.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://reachip.github.io/theme/font-awesome/css/solid.css">
+
+
+
+
+  <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/GNOME_Terminal_icon_2019.svg/128px-GNOME_Terminal_icon_2019.svg.png" type="image/x-icon">
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/GNOME_Terminal_icon_2019.svg/128px-GNOME_Terminal_icon_2019.svg.png" type="image/x-icon">
+
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#090a0b">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#090a0b">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Microsoft EDGE -->
+  <meta name="msapplication-TileColor" content="#090a0b">
+
+<meta name="author" content="Rached MEJRI" />
+<meta name="description" content="Sans copier-coller." />
+<meta name="keywords" content="rust, programmation">
+
+<meta property="og:site_name" content="Rached"/>
+<meta property="og:title" content="Passer des arguments sans les copier en langage Rust"/>
+<meta property="og:description" content="Sans copier-coller."/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="https://reachip.github.io/articles/fr/passage-argument-rust.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-08-27 00:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://reachip.github.io/author/rached-mejri.html">
+<meta property="article:section" content="rust"/>
+<meta property="article:tag" content="rust"/>
+<meta property="article:tag" content="programmation"/>
+<meta property="og:image" content="https://avatars0.githubusercontent.com/u/26501917?s=460&v=4">
+
+  <title>Rached &ndash; Passer des arguments sans les copier en langage Rust</title>
+
+</head>
+
+<body>
+  <aside>
+    <div>
+      <a href="https://reachip.github.io">
+        <div id="particles-js" style="position: absolute"></div>
+        <div style="position: relative">
+          <img src="https://avatars0.githubusercontent.com/u/26501917?s=460&v=4" alt="" title="">
+        </div>
+      </a>
+      <h1><a href="https://reachip.github.io"></a></h1>
+<p>Utilisateur de Linux, Python et Rust en ce qui concerne l'informatique</p>      <img src="https://github.com/Reachip/reachip.github.io/actions/workflows/deploy-pelican.yml/badge.svg" alt="etat du build sur Travis CI"
+        style="border-radius: 0%;">
+      <nav>
+        <ul class="list">
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li>
+          <a  class="sc-envelope" href="mailto:r.mejri74100@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+        <li>
+          <a  class="sc-github" href="https://github.com/Reachip" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="passage-argument-rust">Passer des arguments sans les copier en langage Rust</h1>
+    <p>
+      Posté le Tue 27 August 2019 dans <a href="https://reachip.github.io/category/rust.html">rust</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>Rust répond à besoin, celui de vouloir développer des programmes performants (entre autre). Qui dit performance dit économie de mémoire vive et pour cela, Rust utilise deux concepts : Le passage par référence et la sémantique de mouvement. Respectivement, la deuxième méthode est utilisé implicitement quand l'objet passé en argument n'implémente pas le trait <a href="https://doc.rust-lang.org/std/marker/trait.Copy.html">Copy</a> qui comme son nom l'indique <strong>permet de copier la valeur émise à la fonction cible</strong>.</p>
+<p>On peut en déduire que dans le cas contraire, vous devez <strong>passer par référence la valeur que vous ne voudriez pas copier dans le but d'économiser de la mémoire.</strong></p>
+<p>Voyons ça un peu plus en détail.</p>
+<h1>Le trait Copy</h1>
+<p>Le trait Copy permet de copier une valeur émise, on le trouve <a href="https://doc.rust-lang.org/std/marker/trait.Copy.html#implementors">dans toutes les primitives du langage</a>.</p>
+<p>Prenons un primitif : <a href="https://doc.rust-lang.org/std/primitive.usize.html">usize</a> et créeons une variable nommée <em>X</em> pour commencer.</p>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span>: <span class="kt">usize</span> <span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="c1">// Une variable (mutable) nommée x de type usize.</span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>J'aimerais créer une fonction <code>add_one(x: usize)</code> qui ajoute "1" à la variable passé en argument. J'ai bien dis la variable et non pas la valeur que contient la variable. C'est-à-dire que je veux modifier le nombre 20 qui se trouve dans X et non pas simplement faire une addition sur le nombre 20.</p>
+<p>Pour ça, naïvement, je vais créer ma fonction sans faire un passage par référence.</p>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">add_one</span><span class="p">(</span><span class="k">mut</span><span class="w"> </span><span class="n">y</span>: <span class="kt">usize</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span>: <span class="kt">usize</span> <span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="c1">// Une variable (mutable) nommée x de type usize.</span>
+<span class="w">    </span><span class="n">add_one</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="c1">// Est-ce que add_one va modifier ma variable X ?</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="c1">// Non car X vaut toujours 20 lorsque qu&#39;on debug.</span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>Ici <em>x</em> vaut toujours 20, c'est parce que la variable <em>x</em> a été copié. Par conséquent la fonction <code>add_one</code> n'a pas modifié directement la variable <em>x</em> passé mais plûtot un type usize copié depuis le usize que contenait <em>x</em>.</p>
+<p>Mais comment modifier la variable <em>x</em> via une fonction ? Je pense que vous vous en doutiez pour ceux qui auraient pratiqués les langages C/C++, il faut passer <em>x</em> "par référence".</p>
+<h1>Le passage par référence</h1>
+<p>Le passage par référence évite la copie et permet de directement modifier un contenu mutable (une variable pour vulgariser) contenant un type.</p>
+<p>Pour préciser qu'on va traiter une donnée par référence, on utilise <code>&amp;</code> et <code>*</code>. En pratique, ça donne ça :</p>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">add_one</span><span class="p">(</span><span class="n">y</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="kt">usize</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="o">*</span><span class="n">y</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="c1">// On &quot;pointe&quot; vers la valeur de Y via &quot;*&quot;</span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span>: <span class="kt">usize</span> <span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w"> </span><span class="c1">// Une variable (mutable) nommée x de type usize.</span>
+<span class="w">    </span><span class="n">add_one</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="c1">// Est-ce que add_one va modifier ma variable X ?</span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="c1">// Oui car X vaut maintenant 21.</span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>Le passage par référence (si le contexte est adapté pour ne pas copier) est donc le moyen explicite que le programmeur utilse pour ne pas copier un objet mutable ou immutable et de modifier directement la variable soumise à la fonction traitante.</p>
+<p>Mais ce comportement, Rust permet de le faire seul si le trait Copy n'est pas implémenté chez un objet. C'est la sématique de mouvement.</p>
+<h1>La sémantique de mouvement</h1>
+<p>Si un objet n'implémente pas le trait Copy, alors dans notre cas, Rust va automatiquement supprimé <em>x</em> pour "donner" sa valeur à la fonction qui dans laquelle on a passé <em>x</em> en argument.</p>
+<div class="tenor-gif-embed" data-postid="5306424" data-share-method="host" data-width="100%" data-aspect-ratio="1.9047619047619047"><a href="https://tenor.com/view/disparition-disparaitre-disappear-disappearance-gif-5306424">Disparition GIF</a> from <a href="https://tenor.com/search/harrypotter-gifs">Harrypotter GIFs</a></div>
+<script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
+<p>Exemple :</p>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">add_one</span><span class="p">(</span><span class="k">mut</span><span class="w"> </span><span class="n">v</span>: <span class="nc">y</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="c1">// Ajoute un au premier élément du vecteur.</span>
+<span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="cm">/* Le type Vec&lt;usize&gt; n&#39;implémente pas le trait Copy donc Rust va utliser la sémantique de mouvement. */</span><span class="w"></span>
+<span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">usize</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">];</span><span class="w"></span>
+<span class="n">add_one</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="c1">// Le compilateur renvoie une erreur an voulant afficher &quot;x&quot; car &quot;x&quot; a été supprimé grâce à la sémantique de mouvement, on évite de copier en déplacant.</span>
+<span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>Parfait, Rust évite la copie automatiquement. Si vous voulez modifier directement "x" sans qu'il soit supprimé vous pouvez faire comme tout à l'heure en passant "x" à <code>add_one</code> par référence.</p>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">add_one</span><span class="p">(</span><span class="n">v</span>: <span class="kp">&amp;</span><span class="nc">mut</span><span class="w"> </span><span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">usize</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="c1">// Ajoute un au premier élément du vecteur.</span>
+<span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/* Le type Vec&lt;usize&gt; n&#39;implémente pas le trait Copy donc Rust va utliser la sémantique de mouvement. */</span><span class="w"></span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="k">mut</span><span class="w"> </span><span class="n">x</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="kt">usize</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">];</span><span class="w"></span>
+<span class="w">    </span><span class="n">add_one</span><span class="p">(</span><span class="o">&amp;</span><span class="k">mut</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;{}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="w"></span>
+<span class="w">    </span><span class="cm">/* &quot;x&quot; n&#39;a pas été supprimé et a donc été passé par référence. On peut donc constater que son premier élément ne vaut plus &quot;10&quot; mais &quot;11&quot;. */</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://reachip.github.io/tag/rust.html">rust</a>
+      <a href="https://reachip.github.io/tag/programmation.html">programmation</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sir-rached';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; Rached Mejri  - This work is licensed under a <a rel="license"
+    href="http://creativecommons.org/licenses///">
+     International License</a>
+    <br>
+</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a href="/annexe/mentions-legales.html">Voir les mentions légales</a>
+  <br />
+  <a rel="license" href="http://creativecommons.org/licenses///"
+    target="_blank">
+    <img alt="Creative Commons License" title="Creative Commons License" style="border-width:0"
+      src="https://licensebuttons.net/l/by-nd/3.0/88x31.png" />
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Rached ",
+  "url" : "https://reachip.github.io",
+  "image": "https://avatars0.githubusercontent.com/u/26501917?s=460&v=4",
+  "description": "Blog d'un étudiant, utilisateur de Linux, Python et Rust en ce qui concerne l'informatique."
+}
+</script>
+
+<a href="https://github.com/Reachip/reachip.github.io" class="github-corner" aria-label="View source on Github">
+    <svg width="80"
+         height="80"
+         viewBox="0 0 250 250"
+         style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+         aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor"
+              style="transform-origin: 130px 106px;"
+              class="octo-arm">
+        </path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor"
+              class="octo-body">
+        </path>
+    </svg>
+</a>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>  <script type="text/javascript" src="https://reachip.github.io/theme/js/particles.min.js"></script>
+  <script type="text/javascript" src="https://reachip.github.io/theme/js/app.js"></script>
+</body>
+
+</html>

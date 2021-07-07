@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta name="google-site-verification" content="iDUS_oNkci5GYtDQyc0iwcib37Mmw6NKIAhmqq5A_V4" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">   <link rel="stylesheet/less" type="text/css" href="https://reachip.github.io/theme/stylesheet/style.less">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css"
+    href="https://reachip.github.io/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="https://reachip.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://reachip.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://reachip.github.io/theme/font-awesome/css/solid.css">
+
+
+
+
+  <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/GNOME_Terminal_icon_2019.svg/128px-GNOME_Terminal_icon_2019.svg.png" type="image/x-icon">
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/GNOME_Terminal_icon_2019.svg/128px-GNOME_Terminal_icon_2019.svg.png" type="image/x-icon">
+
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#090a0b">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#090a0b">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Microsoft EDGE -->
+  <meta name="msapplication-TileColor" content="#090a0b">
+
+<meta name="author" content="Rached MEJRI" />
+<meta name="description" content="Et tout ça sans laisser de miettes." />
+<meta name="keywords" content="rust, programmation">
+
+<meta property="og:site_name" content="Rached"/>
+<meta property="og:title" content="Le concept de lifetimes du langage Rust"/>
+<meta property="og:description" content="Et tout ça sans laisser de miettes."/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="https://reachip.github.io/articles/fr/lifetime-langage-rust.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2019-06-04 00:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://reachip.github.io/author/rached-mejri.html">
+<meta property="article:section" content="rust"/>
+<meta property="article:tag" content="rust"/>
+<meta property="article:tag" content="programmation"/>
+<meta property="og:image" content="https://avatars0.githubusercontent.com/u/26501917?s=460&v=4">
+
+  <title>Rached &ndash; Le concept de lifetimes du langage Rust</title>
+
+</head>
+
+<body>
+  <aside>
+    <div>
+      <a href="https://reachip.github.io">
+        <div id="particles-js" style="position: absolute"></div>
+        <div style="position: relative">
+          <img src="https://avatars0.githubusercontent.com/u/26501917?s=460&v=4" alt="" title="">
+        </div>
+      </a>
+      <h1><a href="https://reachip.github.io"></a></h1>
+<p>Utilisateur de Linux, Python et Rust en ce qui concerne l'informatique</p>      <img src="https://github.com/Reachip/reachip.github.io/actions/workflows/deploy-pelican.yml/badge.svg" alt="etat du build sur Travis CI"
+        style="border-radius: 0%;">
+      <nav>
+        <ul class="list">
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li>
+          <a  class="sc-envelope" href="mailto:r.mejri74100@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+        <li>
+          <a  class="sc-github" href="https://github.com/Reachip" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="lifetime-langage-rust">Le concept de lifetimes du langage Rust</h1>
+    <p>
+      Posté le Tue 04 June 2019 dans <a href="https://reachip.github.io/category/rust.html">rust</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <p>D'après <a href="https://fr.wikipedia.org/wiki/Rust_(langage)">Wikipédia</a> pour ceux qui ne connaissent pas le langage : "Rust est un langage de programmation compilé multi-paradigme conçu et développé par Mozilla Research. Il a été conçu pour être « un langage sécurisé, concurrent, pratique » supportant les styles de programmation purement fonctionnel, modèle d'acteur, procédural, ainsi qu'orienté objet sous certains aspects.</p>
+<h1>Les engagements de Rust</h1>
+<p>Comme vu précédemment, Rust se veux sécurisé, concurrent et pratique. Sécurisé en insistant sur des mécanismes que le programmeur doit impérativement appliquer, concurrent car il pousse à limiter les erreurs courantes de conceptions lors de l'écriture de programme concurrents et pratique de part son abstraction avec le moindre impact sur les performances, et ça, c'est plutôt cool.</p>
+<h1>Prérequis</h1>
+<p>Dans ce billet je vais tenter de vulgariser le concept de lifetime, qui découle d'autres concepts tel que l'ownership de prime à bord, suivi de près par le borrowing. Le livre (book) de Rust explique avec précisions ses deux notions. Je vous laisse donc le soin d'aller vous documenter seul parce que je suis un flemmard hors-pair.</p>
+<h1>Les lifetimes (les durées de vies en tant que bon français nationaliste)</h1>
+<p>Nous voilà au cœur du sujet. Qu'est-ce qu'une durée de vie en Rust ? Afin de répondre à cette question on va faire des conneries avec notre clavier afin de définir le concept plus facilement.</p>
+<p>Imaginons que je souhaite créer une fonction qui pourra prendre en paramètre une référence de "vecteur" ('''std::vec::Vec''') et retourner une référence de son premier élément.</p>
+<p>On ferait comme ça :</p>
+<div class="highlight"><pre><span></span><code><span class="cm">/*</span>
+<span class="cm">* NB: Ce code ne compilera pas !</span>
+<span class="cm">*/</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">elements</span>: <span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="s">&quot;pierre&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;paul&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;jack&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">first_element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_first_element</span><span class="p">(</span><span class="o">&amp;</span><span class="n">elements</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">get_first_element</span><span class="p">(</span><span class="n">x</span>: <span class="kp">&amp;</span><span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="kt">str</span> <span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="o">&amp;</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>Après une tentative de compilation qui a échouée et en gage de reconnaissance, notre bien aimé compilateur renvoie ceci :</p>
+<div class="highlight"><pre><span></span><code><span class="k">error</span><span class="err">[</span><span class="n">E0106</span><span class="err">]</span><span class="o">:</span> <span class="n">missing</span> <span class="n">lifetime</span> <span class="n">specifier</span>
+ <span class="o">--&gt;</span> <span class="n">main</span><span class="p">.</span><span class="n">rs</span><span class="o">:</span><span class="mi">1</span><span class="o">:</span><span class="mi">40</span>
+  <span class="o">|</span>
+<span class="mi">1</span> <span class="o">|</span> <span class="n">fn</span> <span class="n">get_first_element</span><span class="p">(</span><span class="n">x</span><span class="o">:</span> <span class="o">&amp;</span><span class="n">Vec</span><span class="o">&lt;&amp;</span><span class="n">str</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="o">&amp;</span><span class="n">str</span> <span class="err">{</span>
+  <span class="o">|</span>                                        <span class="o">^</span> <span class="n">expected</span> <span class="n">lifetime</span> <span class="n">parameter</span>
+  <span class="o">|</span>
+  <span class="o">=</span> <span class="k">help</span><span class="o">:</span> <span class="n">this</span> <span class="k">function</span><span class="s1">&#39;s return type contains a borrowed value, but the signature does not say which one of `x`&#39;</span><span class="n">s</span> <span class="mi">2</span> <span class="n">lifetimes</span> <span class="n">it</span> <span class="k">is</span> <span class="n">borrowed</span> <span class="k">from</span>
+
+<span class="k">error</span><span class="o">:</span> <span class="n">aborting</span> <span class="n">due</span> <span class="k">to</span> <span class="n">previous</span> <span class="k">error</span>
+
+<span class="k">For</span> <span class="n">more</span> <span class="n">information</span> <span class="n">about</span> <span class="n">this</span> <span class="k">error</span><span class="p">,</span> <span class="n">try</span> <span class="n n-Quoted">`rustc --explain E0106`</span><span class="p">.</span>
+</code></pre></div>
+
+<p>Lorsque cette erreur est mentionnée, vous allez devoir mettre explicitement des lifetime dans votre code.</p>
+<p>En Rust vous devez penser scope car il n'y à pas de système de ramasse miettes comme en Python pour dé-allouer (vider la mémoire qu'occupe un objet quelconque dans votre programme). Plutôt qu'utiliser un système de ramasse miettes, Rust va désallouer les objets assignés à chaque fin de scopes. Il s'agit du concept d'ownership. Rapidement,la notion ressemble à ça :  </p>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="c1">// Scope A</span>
+<span class="w">        </span><span class="c1">// Nous sommes entre duex accolades,</span>
+<span class="w">        </span><span class="c1">// il s&#39;agit donc d&#39;un scope</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"></span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// a et b ont été détruites car ici se situe la fin du scope A</span>
+
+<span class="w">    </span><span class="c1">// Le Scope B, il s&#39;agit du scope principal de la fonction main</span>
+
+<span class="w">    </span><span class="c1">// Ici, le compilateur lévera une erreur dû au fait que a et b n&#39;existent plus //// et sont donc indisponibles dans le scope B.</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">somme</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+
+<p>Comprenez qu'avec l'exemple de tout à l'heure qui utilisait la fonction <code>get_first_element</code> avait la même problématique que le code ci-contre.</p>
+<p>La fonction <code>get_first_element</code> représentait un scope qui pouvait renvoyer une référence.</p>
+<p>La problématique de tout à l'heure avec notre fonction <code>get_first_element</code> est donc la suivante : La réference retournée par la fonction <code>get_first_element</code> ne vit pas assez longtemps, elle a été "tué" lors de la fin du scope de la fonction <code>get_first_element</code>.</p>
+<p>Parfois le compilateur n'est pas assez intelligent pour déduire le fait qu'on souhaite utiliser la référence de retour d'une fonction dans un autre scope, il va donc falloir préciser qu'on souhaite faire vivre plus longtemps la référence de retour via des tags qui représentent la durée de vie d'une référence.</p>
+<p>Les lifetimes ou les durées de vies sont donc grosomodo des lettres (tags) que vous allez devoir ajouter à votre code afin d'exprimer ceci : "Je vais te passer une valeur, mais je veux que la référence de cette valeur à la fin du scope survive et que je puisse l'éxploiter sur un autre scope".</p>
+<p>Si nous reprenons l'exemple de tout à l'heure mais cette fois en utilisant les tags de lifetimes :</p>
+<div class="highlight"><pre><span></span><code><span class="k">fn</span> <span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">elements</span>: <span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="fm">vec!</span><span class="p">[</span><span class="s">&quot;pierre&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;paul&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;jack&quot;</span><span class="p">];</span><span class="w"></span>
+<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="n">_first_element</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_first_element</span><span class="p">(</span><span class="o">&amp;</span><span class="n">elements</span><span class="p">);</span><span class="w"></span>
+<span class="w">  </span><span class="c1">// OK, &amp;x[0] survivera jusqu&#39;à la fin de ce scope</span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">fn</span> <span class="nf">get_first_element</span><span class="o">&lt;&#39;</span><span class="na">a</span><span class="o">&gt;</span><span class="p">(</span><span class="n">x</span>: <span class="kp">&amp;</span><span class="o">&#39;</span><span class="na">a</span> <span class="nb">Vec</span><span class="o">&lt;&amp;</span><span class="kt">str</span><span class="o">&gt;</span><span class="p">)</span><span class="w"> </span>-&gt; <span class="kp">&amp;</span><span class="o">&#39;</span><span class="na">a</span> <span class="kt">str</span> <span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="o">&amp;</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://reachip.github.io/tag/rust.html">rust</a>
+      <a href="https://reachip.github.io/tag/programmation.html">programmation</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sir-rached';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; Rached Mejri  - This work is licensed under a <a rel="license"
+    href="http://creativecommons.org/licenses///">
+     International License</a>
+    <br>
+</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a href="/annexe/mentions-legales.html">Voir les mentions légales</a>
+  <br />
+  <a rel="license" href="http://creativecommons.org/licenses///"
+    target="_blank">
+    <img alt="Creative Commons License" title="Creative Commons License" style="border-width:0"
+      src="https://licensebuttons.net/l/by-nd/3.0/88x31.png" />
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Rached ",
+  "url" : "https://reachip.github.io",
+  "image": "https://avatars0.githubusercontent.com/u/26501917?s=460&v=4",
+  "description": "Blog d'un étudiant, utilisateur de Linux, Python et Rust en ce qui concerne l'informatique."
+}
+</script>
+
+<a href="https://github.com/Reachip/reachip.github.io" class="github-corner" aria-label="View source on Github">
+    <svg width="80"
+         height="80"
+         viewBox="0 0 250 250"
+         style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+         aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor"
+              style="transform-origin: 130px 106px;"
+              class="octo-arm">
+        </path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor"
+              class="octo-body">
+        </path>
+    </svg>
+</a>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>  <script type="text/javascript" src="https://reachip.github.io/theme/js/particles.min.js"></script>
+  <script type="text/javascript" src="https://reachip.github.io/theme/js/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,417 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta name="google-site-verification" content="iDUS_oNkci5GYtDQyc0iwcib37Mmw6NKIAhmqq5A_V4" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">   <link rel="stylesheet/less" type="text/css" href="https://reachip.github.io/theme/stylesheet/style.less">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css"
+    href="https://reachip.github.io/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="https://reachip.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://reachip.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://reachip.github.io/theme/font-awesome/css/solid.css">
+
+
+
+
+  <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/GNOME_Terminal_icon_2019.svg/128px-GNOME_Terminal_icon_2019.svg.png" type="image/x-icon">
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/GNOME_Terminal_icon_2019.svg/128px-GNOME_Terminal_icon_2019.svg.png" type="image/x-icon">
+
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#090a0b">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#090a0b">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Microsoft EDGE -->
+  <meta name="msapplication-TileColor" content="#090a0b">
+
+<meta name="author" content="Rached MEJRI" />
+<meta name="description" content="Concevoir du code SOLID, sans mauvais jeux de mots." />
+<meta name="keywords" content="conception, programmation, poo">
+
+<meta property="og:site_name" content="Rached"/>
+<meta property="og:title" content="Concevoir du code SOLID"/>
+<meta property="og:description" content="Concevoir du code SOLID, sans mauvais jeux de mots."/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="https://reachip.github.io/articles/fr/concevoir-du-code-solid.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2021-06-11 00:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://reachip.github.io/author/rached-mejri.html">
+<meta property="article:section" content="programmation"/>
+<meta property="article:tag" content="conception"/>
+<meta property="article:tag" content="programmation"/>
+<meta property="article:tag" content="poo"/>
+<meta property="og:image" content="https://avatars0.githubusercontent.com/u/26501917?s=460&v=4">
+
+  <title>Rached &ndash; Concevoir du code SOLID</title>
+
+</head>
+
+<body>
+  <aside>
+    <div>
+      <a href="https://reachip.github.io">
+        <div id="particles-js" style="position: absolute"></div>
+        <div style="position: relative">
+          <img src="https://avatars0.githubusercontent.com/u/26501917?s=460&v=4" alt="" title="">
+        </div>
+      </a>
+      <h1><a href="https://reachip.github.io"></a></h1>
+<p>Utilisateur de Linux, Python et Rust en ce qui concerne l'informatique</p>      <img src="https://github.com/Reachip/reachip.github.io/actions/workflows/deploy-pelican.yml/badge.svg" alt="etat du build sur Travis CI"
+        style="border-radius: 0%;">
+      <nav>
+        <ul class="list">
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li>
+          <a  class="sc-envelope" href="mailto:r.mejri74100@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+        <li>
+          <a  class="sc-github" href="https://github.com/Reachip" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="concevoir-du-code-solid">Concevoir du code SOLID</h1>
+    <p>
+      Posté le Fri 11 June 2021 dans <a href="https://reachip.github.io/category/programmation.html">programmation</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <div class="videoWrapper">
+    <iframe width="1280" height="765" src="https://www.youtube.com/embed/ozkNEOGpIe8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<p>Aujourd'hui, j'ai décidé d'écrire un article sur ce que sont les principes dit "SOLID", comment et quand les appliquer dans vos projets.</p>
+<p>Tout d'abord, et toujours d'après ce chère Wikipédia :</p>
+<blockquote>
+<p>En programmation orientée objet, SOLID est un acronyme mnémonique qui regroupe cinq principes de conception destinés à produire des architectures logicielles plus compréhensibles, flexibles et maintenables. Les principes sont un sous-ensemble de nombreux principes promus par l'ingénieur logiciel et instructeur américain Robert C. Martin.</p>
+<p>Bien qu'ils s'appliquent à toute conception orientée objet, les principes SOLID peuvent également former une philosophie de base pour des méthodologies telles que le développement agile ou le développement de logiciels adaptatifs. </p>
+</blockquote>
+<p>Maintenant qu'on sait ça, place à la pratique. J'écris actuellement ces lignes avec tritesse, car je n'utiliserais pas le langage Python pour illustrer mes propos, mais le langage C# qui proposent une meilleure intégration des concepts d'interfaces, de classes abstraites et de polymorphisme. Nous aurions pu le faire en Python, mais cela aurait risqué d'être plus trivial à implémenter.</p>
+<h1>S comme principe de responsabilité unique</h1>
+<p>Ce principe est surement l'un des plus simples à comprendre. <strong>Arrêtez les classes foures-tout !</strong>
+Une classe doit avoir une seule et unique responsabilité, une seule et unique tâche.</p>
+<p>Si vous avez une classe qui représente une forme géométrique, une fausse bonne idée serait de lui passer des méthodes qui réalisent les calculs d'air ou de périmètre liées à cette classe. On se retrouve donc avec une classe qui doit à la fois créer nos formes et réaliser les calculs par rapports aux propriétés. Cela n'est pas modulable et viole les prochains principes que nous allons voir.</p>
+<div class="highlight"><pre><span></span><code><span class="k">abstract</span> <span class="k">class</span> <span class="nc">Rectangle</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">Length</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">protected</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">Width</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">protected</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nf">Rectangle</span><span class="p">(</span><span class="kt">double</span> <span class="n">length</span><span class="p">,</span> <span class="kt">double</span> <span class="n">width</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Length</span> <span class="p">=</span> <span class="n">length</span><span class="p">;</span>
+        <span class="n">Width</span> <span class="p">=</span> <span class="n">width</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">double</span> <span class="nf">Air</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Length</span> <span class="p">*</span> <span class="n">Width</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Nous allons donc mettre toutes nos méthodes de calcul dans une classe dédié à cette tâche.</p>
+<div class="highlight"><pre><span></span><code><span class="k">abstract</span> <span class="k">class</span> <span class="nc">Rectangle</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">Length</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">protected</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">Width</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">protected</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nf">Rectangle</span><span class="p">(</span><span class="kt">double</span> <span class="n">length</span><span class="p">,</span> <span class="kt">double</span> <span class="n">width</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Length</span> <span class="p">=</span> <span class="n">length</span><span class="p">;</span>
+        <span class="n">Width</span> <span class="p">=</span> <span class="n">width</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ComputeRectangle</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Rectangle</span> <span class="n">Rectangle</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nf">ComputeRectangle</span><span class="p">(</span><span class="n">Rectangle</span> <span class="n">rectangle</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Rectangle</span> <span class="p">=</span> <span class="n">rectangle</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">double</span> <span class="nf">Air</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Rectangle</span><span class="p">.</span><span class="n">Length</span> <span class="p">*</span> <span class="n">Rectangle</span><span class="p">.</span><span class="n">Width</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>C'est bien, mais on peut faire beaucoup mieux. Admettons que je veuille faire la même chose pour d'autres figures géométriques. Comment je ferais ?</p>
+<h1>O comme principe Ouvert/fermé (Open/closed principle)</h1>
+<p>Toujours d'après Wikipédia : Une entité applicative (class, fonction, module ...) doit être fermée à la modification directe mais ouverte à l'extension.</p>
+<p>Concrètement, même si je veux calculer l'air de mon triangle, je n'aurais pas le droit de modifier ma classe ComputeRectangle pour faire en sorte qu'elle puisse aussi calculer l'air de mon triangle. Souvenez-vous, cela violera le principe vu précédemment et modifier le code d'une classe amenerait à pas mal de régressions dans certains cas. Il faudrait avoir une entité distinct pour les calculs du rectangle et du triangle.</p>
+<h2>Quelle solution ?</h2>
+<p>Une interface. Avec elle, on pourra avoir différentes classes qui font nos calcules géométriques qui auront à la fois une seule et même responsabilité dans lesquelles on va pouvoir seulement modifier le corps des méthodes, sans en rajouter à chaque nouvelles figures géométriques ajoutés au programme.</p>
+<p>Ce qui nous donne :</p>
+<div class="highlight"><pre><span></span><code><span class="k">interface</span> <span class="n">IComputeGeometricForm</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="nf">Area</span><span class="p">();</span>
+<span class="p">}</span>
+
+
+<span class="k">class</span> <span class="nc">Rectangle</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">Length</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">protected</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">Width</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">protected</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nf">Rectangle</span><span class="p">(</span><span class="kt">double</span> <span class="n">length</span><span class="p">,</span> <span class="kt">double</span> <span class="n">width</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Length</span> <span class="p">=</span> <span class="n">length</span><span class="p">;</span>
+        <span class="n">Width</span> <span class="p">=</span> <span class="n">width</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Triangle</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">Base</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">protected</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">Width</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">protected</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nf">Triangle</span><span class="p">(</span><span class="kt">double</span> <span class="n">base_</span><span class="p">,</span> <span class="kt">double</span> <span class="n">width</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Base</span> <span class="p">=</span> <span class="n">base_</span><span class="p">;</span>
+        <span class="n">Width</span> <span class="p">=</span> <span class="n">width</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+
+<span class="k">class</span> <span class="nc">ComputeRectangle</span> <span class="p">:</span> <span class="n">IComputeGeometricForm</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Rectangle</span> <span class="n">Rectangle</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nf">ComputeRectangle</span><span class="p">(</span><span class="n">Rectangle</span> <span class="n">rectangle</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Rectangle</span> <span class="p">=</span> <span class="n">rectangle</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">double</span> <span class="nf">Area</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Rectangle</span><span class="p">.</span><span class="n">Length</span> <span class="p">*</span> <span class="n">Rectangle</span><span class="p">.</span><span class="n">Width</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ComputeTriangle</span> <span class="p">:</span> <span class="n">IComputeGeometricForm</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Triangle</span> <span class="n">Triangle</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nf">ComputeTriangle</span><span class="p">(</span><span class="n">Triangle</span> <span class="n">triangle</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Triangle</span> <span class="p">=</span> <span class="n">triangle</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">double</span> <span class="nf">Area</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Triangle</span><span class="p">.</span><span class="n">Base</span> <span class="p">*</span> <span class="n">Triangle</span><span class="p">.</span><span class="n">Width</span> <span class="p">/</span> <span class="m">2</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Et là, on vient de violer un autre principe : l'Inversion des dépendances.</p>
+<h1>L comme principe de substitution de Liskov</h1>
+<p>Dans notre exemple, les classes qui implémentent <code>IComputeGeometricForm</code> requièrent dans leurs constructeurs une forme géométrique bien spécifique.</p>
+<p>On peut constater qu'on limite le couplage en injectant les dépendances directement dans les classes chargées des calcul, mais cela ne suffit pas.</p>
+<h2>Le test du canard</h2>
+<blockquote>
+<p>"If it look like a duck, quaks like a duck, but needs batteries - You probably have the wrong abstraction"</p>
+</blockquote>
+<p>Cette assertion est asser représentative du problème posé. Si vous demandez de faire des calculs sur un triangle, il s'agit d'une forme géométrique qui a des caractéristiques communes avec le rectangle, le carré, le cercle et j'en passe. Comme c'est une forme géometrique, elle doit posséder les mêmes caractéristiques que les autres et les mêmes propriétés n'est ce pas ?</p>
+<h2>Quelle solution ?</h2>
+<p>Il s'agit donc dans notre code de dire : "Je vais te passer une forme géométrique que tu va pouvoir utiliser comme toutes les autres et tu n'auras aucune suprise, promis".</p>
+<p>Petite ouverture concernant la programmation par contrat : <a href="https://fr.wikipedia.org/wiki/Programmation_par_contrat">https://fr.wikipedia.org/wiki/Programmation_par_contrat</a></p>
+<p>Pour cela, on pourrait créer une classe abstraite Form qui contient l'ensemble des propriétés du forme géometrique et d'explicitement demander dans les classes qui calculent un objet de type <code>Form</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="k">abstract</span> <span class="k">class</span> <span class="nc">Form</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">Length</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">protected</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">Width</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">protected</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">public</span> <span class="kt">double</span> <span class="n">Base</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">protected</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nf">Form</span><span class="p">(</span><span class="kt">double</span> <span class="n">lenght</span><span class="p">,</span> <span class="kt">double</span> <span class="n">width</span><span class="p">,</span> <span class="kt">double</span> <span class="n">base_</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Length</span> <span class="p">=</span> <span class="n">lenght</span><span class="p">;</span>
+        <span class="n">Width</span> <span class="p">=</span> <span class="n">width</span><span class="p">;</span>
+        <span class="n">Base</span> <span class="p">=</span> <span class="n">base_</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Rectangle</span> <span class="p">:</span> <span class="n">Form</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nf">Rectangle</span><span class="p">(</span><span class="kt">double</span> <span class="n">length</span><span class="p">,</span> <span class="kt">double</span> <span class="n">width</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="n">length</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">Triangle</span> <span class="p">:</span> <span class="n">Form</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="nf">Triangle</span><span class="p">(</span><span class="kt">double</span> <span class="n">base_</span><span class="p">,</span> <span class="kt">double</span> <span class="n">width</span><span class="p">)</span> <span class="p">:</span> <span class="k">base</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">base_</span><span class="p">)</span> <span class="p">{}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ComputeRectangle</span> <span class="p">:</span> <span class="n">IComputeGeometricForm</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Form</span> <span class="n">Rectangle</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nf">ComputeRectangle</span><span class="p">(</span><span class="n">Form</span> <span class="n">rectangle</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Rectangle</span> <span class="p">=</span> <span class="n">rectangle</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">double</span> <span class="nf">Area</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Rectangle</span><span class="p">.</span><span class="n">Length</span> <span class="p">*</span> <span class="n">Rectangle</span><span class="p">.</span><span class="n">Width</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">class</span> <span class="nc">ComputeTriangle</span> <span class="p">:</span> <span class="n">IComputeGeometricForm</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="n">Form</span> <span class="n">Triangle</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="k">public</span> <span class="nf">ComputeTriangle</span><span class="p">(</span><span class="n">Form</span> <span class="n">triangle</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">Triangle</span> <span class="p">=</span> <span class="n">triangle</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="kt">double</span> <span class="nf">Area</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Triangle</span><span class="p">.</span><span class="n">Base</span> <span class="p">*</span> <span class="n">Triangle</span><span class="p">.</span><span class="n">Width</span> <span class="p">/</span> <span class="m">2</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h1>I comme principe de ségrégation des interfaces</h1>
+<p>C'est surement le principe le plus facile à comprendre.</p>
+<blockquote>
+<p>Il faut diviser les interfaces volumineuses en plus petites plus spécifiques, de sorte que les clients 
+n'ont accès qu'aux méthodes intéressantes pour eux.</p>
+</blockquote>
+<p>Limiter vous à quelques méthodes tout en gardant en tête que les méthodes classe qui hérite d'une interface doivent toujours avec un but. Si elles doivent ne contenir aucun corps ou lancer une exception dès son appel, vous avez sûrement violé ce principe.</p>
+<h1>D comme principe d'inversion des dépendances</h1>
+<blockquote>
+<p>Les modules de haut-niveau ne doivent pas dépendre des modules de bas-niveau. Les deux doivent dépendre 
+d’abstraction.</p>
+</blockquote>
+<p>Il s'agit de ce qu'on vient de voir tout à l'heure avec Liskov, mais sous un autre angle : Rien ne doit dépendre de qui que ce soit.</p>
+<p>Nos propriétés de calculs doivent se faire injecter une dépendance si besoin, dans le constructeur, ou dans des méthodes et doivent réclamer une interface ou une abstraction. C'est un ensemble des trois principes vues précédemment afin d'avoir une couche d'abstraction supplémentaire et de limiter la casse quant aux violations de principe de responsabilité unique et du principe ouvert/fermé.</p>
+<h1>Est-ce que je dois suivre tous ces principes à la lettre ?</h1>
+<div class="tenor-gif-embed" data-postid="3440314" data-share-method="host" data-width="100%" data-aspect-ratio="1.358695652173913"><a href="https://tenor.com/view/care-bears-train-rainbow-gif-3440314">Calinours GIF</a> from <a href="https://tenor.com/search/carebears-gifs">Carebears GIFs</a></div>
+<script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+
+<p>Dans le monde des Bisounours, toute votre équipe connait ces principes et les appliquent scrupuleusement. Dans la vraie vie c'est différent : On fait, on défait et on injecte très souvent sans abstraction.</p>
+<p>Echouer, c'est avoir la possibilité de recommencer de manière plus intelligente.</p>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://reachip.github.io/tag/conception.html">conception</a>
+      <a href="https://reachip.github.io/tag/programmation.html">programmation</a>
+      <a href="https://reachip.github.io/tag/poo.html">poo</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sir-rached';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; Rached Mejri  - This work is licensed under a <a rel="license"
+    href="http://creativecommons.org/licenses///">
+     International License</a>
+    <br>
+</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a href="/annexe/mentions-legales.html">Voir les mentions légales</a>
+  <br />
+  <a rel="license" href="http://creativecommons.org/licenses///"
+    target="_blank">
+    <img alt="Creative Commons License" title="Creative Commons License" style="border-width:0"
+      src="https://licensebuttons.net/l/by-nd/3.0/88x31.png" />
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Rached ",
+  "url" : "https://reachip.github.io",
+  "image": "https://avatars0.githubusercontent.com/u/26501917?s=460&v=4",
+  "description": "Blog d'un étudiant, utilisateur de Linux, Python et Rust en ce qui concerne l'informatique."
+}
+</script>
+
+<a href="https://github.com/Reachip/reachip.github.io" class="github-corner" aria-label="View source on Github">
+    <svg width="80"
+         height="80"
+         viewBox="0 0 250 250"
+         style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+         aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor"
+              style="transform-origin: 130px 106px;"
+              class="octo-arm">
+        </path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor"
+              class="octo-body">
+        </path>
+    </svg>
+</a>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>  <script type="text/javascript" src="https://reachip.github.io/theme/js/particles.min.js"></script>
+  <script type="text/javascript" src="https://reachip.github.io/theme/js/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta name="google-site-verification" content="iDUS_oNkci5GYtDQyc0iwcib37Mmw6NKIAhmqq5A_V4" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">   <link rel="stylesheet/less" type="text/css" href="https://reachip.github.io/theme/stylesheet/style.less">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/less.js/2.5.1/less.min.js" type="text/javascript"></script>
+
+  <link rel="stylesheet" type="text/css"
+    href="https://reachip.github.io/theme/pygments/monokai.min.css">
+  <link rel="stylesheet" type="text/css" href="https://reachip.github.io/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://reachip.github.io/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://reachip.github.io/theme/font-awesome/css/solid.css">
+
+
+
+
+  <link rel="shortcut icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/GNOME_Terminal_icon_2019.svg/128px-GNOME_Terminal_icon_2019.svg.png" type="image/x-icon">
+  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/GNOME_Terminal_icon_2019.svg/128px-GNOME_Terminal_icon_2019.svg.png" type="image/x-icon">
+
+
+  <!-- Chrome, Firefox OS and Opera -->
+  <meta name="theme-color" content="#090a0b">
+  <!-- Windows Phone -->
+  <meta name="msapplication-navbutton-color" content="#090a0b">
+  <!-- iOS Safari -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <!-- Microsoft EDGE -->
+  <meta name="msapplication-TileColor" content="#090a0b">
+
+<meta name="author" content="Rached MEJRI" />
+<meta name="description" content="Ou qu&#39;est ce qu&#39;une API REST pour rester dans la hype." />
+<meta name="keywords" content="web, http, api">
+
+<meta property="og:site_name" content="Rached"/>
+<meta property="og:title" content="Qu&#39;est ce qu&#39;une API (sur le web) ?"/>
+<meta property="og:description" content="Ou qu&#39;est ce qu&#39;une API REST pour rester dans la hype."/>
+<meta property="og:locale" content="fr_FR"/>
+<meta property="og:url" content="https://reachip.github.io/articles/fr/quest-ce-quune-api-web.html"/>
+<meta property="og:type" content="article"/>
+<meta property="article:published_time" content="2020-07-20 00:00:00+02:00"/>
+<meta property="article:modified_time" content=""/>
+<meta property="article:author" content="https://reachip.github.io/author/rached-mejri.html">
+<meta property="article:section" content="web"/>
+<meta property="article:tag" content="web"/>
+<meta property="article:tag" content="http"/>
+<meta property="article:tag" content="api"/>
+<meta property="og:image" content="https://avatars0.githubusercontent.com/u/26501917?s=460&v=4">
+
+  <title>Rached &ndash; Qu&#39;est ce qu&#39;une API (sur le web) ?</title>
+
+</head>
+
+<body>
+  <aside>
+    <div>
+      <a href="https://reachip.github.io">
+        <div id="particles-js" style="position: absolute"></div>
+        <div style="position: relative">
+          <img src="https://avatars0.githubusercontent.com/u/26501917?s=460&v=4" alt="" title="">
+        </div>
+      </a>
+      <h1><a href="https://reachip.github.io"></a></h1>
+<p>Utilisateur de Linux, Python et Rust en ce qui concerne l'informatique</p>      <img src="https://github.com/Reachip/reachip.github.io/actions/workflows/deploy-pelican.yml/badge.svg" alt="etat du build sur Travis CI"
+        style="border-radius: 0%;">
+      <nav>
+        <ul class="list">
+
+        </ul>
+      </nav>
+
+      <ul class="social">
+        <li>
+          <a  class="sc-envelope" href="mailto:r.mejri74100@gmail.com" target="_blank">
+            <i class="fas fa-envelope">
+            </i>
+          </a></li>
+        <li>
+          <a  class="sc-github" href="https://github.com/Reachip" target="_blank">
+            <i class="fab fa-github">
+            </i>
+          </a></li>
+      </ul>
+    </div>
+
+
+  </aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="quest-ce-quune-api-web">Qu'est ce qu'une API (sur le web) ?</h1>
+    <p>
+      Posté le Mon 20 July 2020 dans <a href="https://reachip.github.io/category/web.html">web</a>
+
+
+    </p>
+  </header>
+
+
+  <div>
+    <h1>Intro</h1>
+<p>En informatique tout est une question de données. Sans blague. </p>
+<p>Parfois, voir souvent, il se peut que vous vouliez récupérer des données depuis un autre site internet : votre banque, Ruedesplaisirs.com, EDF, Facebook, Twitter etc.</p>
+<p>Toutes ces données sont généralement récupérables depuis un serveur HTTP mais pas n'importe comment. En effet, on retourne <strong>souvent (mais pas tout le temps)</strong> du JSON en réponse à la requête HTTP pour une raison qu'on verra tout à l'heure.</p>
+<h1>API de type "REST"</h1>
+<p>"REST" entre trop guillemets car c'est une façon de faire des API pour le web de manière très subjective.</p>
+<p>D'après Wikipedia :</p>
+<blockquote>
+<p>REST (representational state transfer) est un style d'architecture logicielle définissant un ensemble de contraintes à utiliser 
+pour créer des services web. Les services web conformes au style d'architecture REST, aussi appelés services web RESTful, 
+établissent une interopérabilité entre les ordinateurs sur Internet. Les services web REST permettent aux systèmes effectuant des requêtes de manipuler des ressources web [...]</p>
+</blockquote>
+<p>REST est donc un style d'architecture, une convention en d'autres termes. Il ne s'agit pas d'un protocole, d'un framework ou autre concept à appliquer à la lettre pour développer une API. On peut essayer de développer une API REST n'importe comment, d'ou l'importance d'écrire une documentation quand on veut en faire une.</p>
+<h2>Un exemple</h2>
+<p>Disons que je veuille récupérer le nombre de cas infectés par le COVID-19 en France. Pour ça, je vais utiliser le service <a href="https://api.covid19api.com/">api.covid19api.com</a>.</p>
+<p>En cherchant dans la doc, on m'indique que pour récupérer le nombre de cas en France dans plusieurs régions, il faut que je fasse une requête à l'adresse : <a href="https://api.covid19api.com/dayone/country/france/status/confirmed">https://api.covid19api.com/dayone/country/france/status/confirmed</a></p>
+<p>En faisant une requête avec curl, on obtient (en gros) : </p>
+<div class="highlight"><pre><span></span><code>curl -v https://api.covid19api.com/dayone/country/france/status/confirmed
+</code></pre></div>
+
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">&quot;Country&quot;</span><span class="p">:</span><span class="s2">&quot;France&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;CountryCode&quot;</span><span class="p">:</span><span class="s2">&quot;FR&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;Province&quot;</span><span class="p">:</span><span class="s2">&quot;Martinique&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;City&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;CityCode&quot;</span><span class="p">:</span><span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;Lat&quot;</span><span class="p">:</span><span class="s2">&quot;14.64&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;Lon&quot;</span><span class="p">:</span><span class="s2">&quot;-61.02&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;Cases&quot;</span><span class="p">:</span><span class="mi">202</span><span class="p">,</span>
+    <span class="nt">&quot;Status&quot;</span><span class="p">:</span><span class="s2">&quot;confirmed&quot;</span><span class="p">,</span>
+    <span class="nt">&quot;Date&quot;</span><span class="p">:</span><span class="s2">&quot;2020-06-07T00:00:00Z&quot;</span>
+<span class="p">}</span>
+<span class="err">/*</span>
+<span class="err">*</span> <span class="err">e</span><span class="kc">t</span><span class="err">c</span> <span class="err">....</span>
+<span class="err">*/</span>
+</code></pre></div>
+
+<p>Voilà un exemple de requête vers une API REST. On constate qu'une requête de type GET vers une URI spécifique nous retourne des données pour une ressource spécifique au format JSON.</p>
+<h2>Pourquoi du JSON ?</h2>
+<h3>Simplicité et interportabilité</h3>
+<ol>
+<li>Quasiment tous les langages possèdent une librairie pour parser du JSON.</li>
+<li>Du JSON peut facilement être convertis en liste, array, tableau (ou autre structure de données) pour pouvoir utiliser les données qu'il contient dans son programme.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">DATA</span> <span class="o">=</span> <span class="s1">&#39;{&quot;result&quot;:true, &quot;count&quot;:42}&#39;</span><span class="p">;</span>
+<span class="n">json</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">DATA</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">])</span>
+<span class="o">//</span> <span class="n">expected</span> <span class="n">output</span><span class="p">:</span> <span class="mi">42</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="p">[</span><span class="s2">&quot;result&quot;</span><span class="p">])</span>
+<span class="o">//</span> <span class="n">expected</span> <span class="n">output</span><span class="p">:</span> <span class="n">true</span>
+</code></pre></div>
+
+<h3>Pour le front-end</h3>
+<p>Par soucis de framework JS en tout genre et de performance, il est courant pour le front-end de devoir communiquer avec le back-end pour récupérer toutes les données nécessaires à l'utilisateur. Pour ce faire, on implémente une API côté back-end.</p>
+<p>Notre bien aimé JavaScript est en symbiose avec le JSON, si les données retournées par l'API sont en JSON, JS n'aura donc aucune difficulté à utiliser ces données, non non, vraiment aucune.</p>
+<div class="highlight"><pre><span></span><code><span class="kd">const</span> <span class="nx">json</span> <span class="o">=</span> <span class="s1">&#39;{&quot;result&quot;:true, &quot;count&quot;:42}&#39;</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">count</span><span class="p">);</span>
+<span class="c1">// expected output: 42</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">result</span><span class="p">);</span>
+<span class="c1">// expected output: true</span>
+</code></pre></div>
+
+<p><a href="https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/JSON/parse">https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Objets_globaux/JSON/parse</a></p>
+<h3>Parce que c'est cool le JSON, c'est issu du JS</h3>
+<p>Ça c'était pour troll.</p>
+<h2>On peut récupérer des données, mais aussi en envoyer, en enlever et en modifier</h2>
+<p>Si on peut faire une requête de type GET, on peut aussi faire des requêtes POST, PUT, DELETE.</p>
+<p>Pour cela, il vous faut une autorisation de la part de l'API, généralement légitimée par l'obtention d'un jeton (un peu comme un mot de passe) à fournir à l'API avant chaque requêtes pour prouver que c'est bien vous.</p>
+<h2>Requête POST</h2>
+<p>Avec ce type de requête, on "poste" nos informations au serveur (et oui). La requête est généralement envoyée sous le format <code>application/x-www-form-urlencoded</code> : </p>
+<div class="highlight"><pre><span></span><code><span class="nf">POST</span> <span class="nn">/</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">https://reachip.github.io/e621/figurines/order/client?id=123</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+
+client=Loan&amp;payement=espece
+</code></pre></div>
+
+<p>Rien n'empêche d'envoyer la donnée sous un autre format, par exemple en json en précisant au niveau du content-type <code>application/json</code>.</p>
+<h2>Requête PUT</h2>
+<p>Même structure mais conceptuellement, au lieu de poster une nouvelle donnée, on modifie une donnée existante sur le serveur.</p>
+<div class="highlight"><pre><span></span><code><span class="nf">PUT</span> <span class="nn">/</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">https://reachip.github.io/e621/figurines/order/client?id=123</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+
+client=Loan&amp;payement=nature
+</code></pre></div>
+
+<h2>Requête DELETE</h2>
+<p>Elle sert à demander la suppression d'une donnée.</p>
+<div class="highlight"><pre><span></span><code><span class="err">DELETE /e621/figurines/order/client?id=123 HTTP/1.1 </span>
+</code></pre></div>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://reachip.github.io/tag/web.html">web</a>
+      <a href="https://reachip.github.io/tag/http.html">http</a>
+      <a href="https://reachip.github.io/tag/api.html">api</a>
+    </p>
+  </div>
+
+
+
+
+
+<!-- Disqus -->
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+    var disqus_shortname = 'sir-rached';
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>
+    Please enable JavaScript to view comments.
+
+</noscript>
+<!-- End Disqus -->
+</article>
+
+    <footer>
+<p>
+  &copy; Rached Mejri  - This work is licensed under a <a rel="license"
+    href="http://creativecommons.org/licenses///">
+     International License</a>
+    <br>
+</p>
+<p>Powered by <a href="http://getpelican.com" target="_blank">Pelican</a> - <a href="https://github.com/alexandrevicenzi/flex" target="_blank">Flex</a> theme by <a href="http://alexandrevicenzi.com" target="_blank">Alexandre Vicenzi</a>
+</p><p>
+  <a href="/annexe/mentions-legales.html">Voir les mentions légales</a>
+  <br />
+  <a rel="license" href="http://creativecommons.org/licenses///"
+    target="_blank">
+    <img alt="Creative Commons License" title="Creative Commons License" style="border-width:0"
+      src="https://licensebuttons.net/l/by-nd/3.0/88x31.png" />
+  </a>
+</p>    </footer>
+  </main>
+
+
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Rached ",
+  "url" : "https://reachip.github.io",
+  "image": "https://avatars0.githubusercontent.com/u/26501917?s=460&v=4",
+  "description": "Blog d'un étudiant, utilisateur de Linux, Python et Rust en ce qui concerne l'informatique."
+}
+</script>
+
+<a href="https://github.com/Reachip/reachip.github.io" class="github-corner" aria-label="View source on Github">
+    <svg width="80"
+         height="80"
+         viewBox="0 0 250 250"
+         style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;"
+         aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+        <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+              fill="currentColor"
+              style="transform-origin: 130px 106px;"
+              class="octo-arm">
+        </path>
+        <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+              fill="currentColor"
+              class="octo-body">
+        </path>
+    </svg>
+</a>
+<style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>  <script type="text/javascript" src="https://reachip.github.io/theme/js/particles.min.js"></script>
+  <script type="text/javascript" src="https://reachip.github.io/theme/js/app.js"></script>
+</body>
+
+</html>
