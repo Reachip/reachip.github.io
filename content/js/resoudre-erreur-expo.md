@@ -5,10 +5,6 @@ Tags: js, tuto, expo, react native
 Slug: resoudre-erreur-ENOSPC-expo-react-native
 Summary: Parce que j'adore bricoler
 
-<div class="videoWrapper">
-    <iframe width="853" height="480" src="https://www.youtube.com/embed/zsIoHtYtMf0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
-
 # Intro
 
 Pour un projet top secret, je dois me servir de React Native afin de d'essayer de développer une application mobile multi-plateforme.
