@@ -22,7 +22,7 @@ Dans des langages à typage dynamique comme Python, le comportement est déjà i
 
 # Exemple
 
-```
+```python
 class MyIterable:
   def __iter__(self):
     self.counter = 10
