@@ -17,3 +17,4 @@ jobs:
     - uses: nelsonjchen/gh-pages-pelican-action@0.1.5
       env:
         GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        BLOG_DEV: NO
