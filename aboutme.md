@@ -1,6 +1,6 @@
 ---
 layout: page
-title: A propos
+title: A propos de l'auteur
 ---
 
 Développeur full-stack et étudiant à l'IUT d'Annecy, j'ai rapidement fait de ma passion mon métier aux côtés de mes études, de mes contributions sur la plateforme GitHub et de mon blog.
