@@ -8,9 +8,9 @@ share-img: /assets/img/annie-spratt-lU4TuhmIKs4-unsplash.jpeg
 tags: [conception, programmation, poo]
 ---
 
-On retient souvent l'héritage comme l'un des principaux concepts piliers de la programmation orientée objet. En partant du polymorphisme, à l'addition de couches d'abstraction jusqu'à l'ensapsulation, par étonnant que des langages comme Python fondent leurs architectures sur la base d'un seul objet, qui fait dérivé l'ensemble des types de bases d'un langage.
+On retient souvent l’héritage comme l’un des principaux concepts piliers de la programmation orientée objet. En partant du polymorphisme, à l’addition de couches d’abstraction jusqu’à l’encapsulation, par étonnant que des langages comme Python fondent leurs architectures sur la base d’un seul objet, qui fait dériver l’ensemble des types de bases d’un langage.
 
-Comme il est d'usage à notre époque de déconstruire tout et n'importe quoi, nous allons tenter aujourd'hui de déconstruire le mythe de l'héritage qui résout ou presque n'importe quel problème. Et puisque tout ce qui est extrême est dangereux, nous verrons à la fois les bons usages de l'héritage, mais surtout les mauvais, parce que j'estime que vous êtes là pour ça non ?
+Comme il est d’usage à notre époque de déconstruire tout et n’importe quoi, nous allons tenter aujourd’hui de déconstruire le mythe de l’héritage qui résout ou presque n’importe quel problème. Et puisque tout ce qui est extrême est dangereux, nous verrons à la fois les bons usages de l’héritage, mais surtout les mauvais, parce que j’estime que vous êtes là pour ça non ?
 
 # L'héritage, _de base_, c'est une bonne idée si
 
@@ -107,7 +107,11 @@ Faire de l'héritage, c'est s'assurer qu'on puisse réspecter le principe de sub
 
 ### Non respect du principe de responsabilitée unique
 
-Ça aussi. Facile de tomber dans le piège ! Il se peut quand dans notre exemple précédent on veuille rajouter une méthode dans notre carré qui fait en sorte de le déplacer en utilisant 
+Ça aussi. Facile de tomber dans le piège ! Il se peut quand dans notre exemple précédent on veuille rajouter une méthode dans notre carré qui fait en sorte de le déplacer en utilisant une méthode ```move_square``` utilisant ```move_x``` et ```move_y```.
+
+On ne respecte pas le principe de responsabilitée unique qui nous dit qu'une méthode/classe doit avoir un seul et unique job. Dans le plus, on utilise l'héritage à des fins de réutilisation de code pur et dur. 
+
+Un carré n'est alors plus un polygone mais une sorte de super-polygone mutant.
 
 ### Exemple
 
@@ -138,6 +142,15 @@ class Polygon:
     def move_z(self, distance):
       self.move("z", distance)
 
+    def pythagore_theorem(self):
+      # Only for rectangle triangle
+      
+      # etc ...
+      # etc ...
+      # etc ...
+
+      pass
+
     def __str__(self):
       return f"x => {self.x} y => {self.y} z => {self.z}"
 
@@ -159,10 +172,17 @@ square.move_square(34)
 print(square) # x => 61 y => 73 z => 40
 ```
 
-## Utiliser l'héritage au lieu des interfaces
-
-
-## Utiliser partiellement l'héritage
-
 
 # Conclusion
+
+Il y a une question à se poser : De quoi ai-je vraiment besoin ?
+
+On utilise souvent l'héritage ou les classes abstraites seulement pour leurs notions de polymorphisme en se disant que de toute façon, on aura besoin de réutiliser du code à un momement ou à un autre et que de toute façon, c'est une bonne représentation du métier de faire hériter à un carré un polygone.
+
+Et si parfois la solution n'était pas un gros bulldozer polluant mais une simple pelle ?
+
+Je veux dire par là que les interfaces font très bien se boulot, voir en mieux. On s'assure via leurs usages que Liskov est correctement respecté et qu'on ne tombe pas dans des erreurs d'analyses comme vu précédemment des liens entre nos différents objets.
+
+L'interface permet de s'assurer qu'on possède bien des correctement bien spécifique. Le concept a été poussé encore plus loin avec C# 8.0 qui permet de définir des propriétés dans les interfaces. 
+
+Trop de liberté est parfois nuisible, non ?
