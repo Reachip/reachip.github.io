@@ -179,9 +179,9 @@ output
 ee34babd-9f37-4a67-9b80-08527faed5bc
 ```
 
-Comment l'IOC a su qu'il devait injecter le bean randomUUIDBean ? En fait, Spring se base sûr ce que nous avons décrit. Ici, nous avons décrit dans notre code source un seul bean renvoyant un objet ```Randomizer``. Spring se base alors sur cette déclaration et n'en demande pas plus. 
+Comment le container IOC a su qu'il devait injecter le bean randomUUIDBean ? En fait, Spring se base sûr ce que nous avons décrit. Ici, nous avons décrit dans notre code source un seul bean renvoyant un objet ```Randomizer``. Spring se base alors sur cette déclaration et n'en demande pas plus. 
 
-Nous pouvons bien-sûr écrire d'autre Bean renvoyant un objet ```Randomizer```et se montrer plus précis quant à ce que doit faire l'IOC de Spring.
+Nous pouvons bien-sûr écrire d'autre Bean renvoyant un objet ```Randomizer```et se montrer plus précis quant à ce que doit faire le container de Spring.
 
 ```kotlin
 @Bean
@@ -210,11 +210,11 @@ fun runTest() {
 }
 ```
 
-On peut par exemple utiliser l'annotation ```Primary```, qui permet de décrire l'utilisation de ce Bean en cas de choix ambigü à faire par l'IOC.
+On peut par exemple utiliser l'annotation ```Primary```, qui permet de décrire l'utilisation de ce Bean en cas de choix ambigü à faire par le container.
 
 # Avec Spring, il faut décrire afin de le résoudre
 
-Si les quelques lignes si au-dessus qui décrivent brièvement le comportement de l'IOC de Spring sont comprises, il est dorénavant facile de comprendre que Spring s'appuie sur ce que vous décrivez dans votre code source afin d'adapter son comportement et de configurer votre application.
+Si les quelques lignes si au-dessus qui décrivent brièvement le comportement de du container sont comprises, il est dorénavant facile de comprendre que Spring s'appuie sur ce que vous décrivez dans votre code source afin d'adapter son comportement et de configurer votre application.
 
 ```java
 @Configuration
