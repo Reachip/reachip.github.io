@@ -212,7 +212,7 @@ fun runTest() {
 
 On peut par exemple utiliser l'annotation ```Primary```, qui permet de décrire l'utilisation de ce Bean en cas de choix ambigü à faire par le container.
 
-# Avec Spring, il faut décrire afin de le résoudre
+# Avec Spring, il faut décrire afin de résoudre
 
 Si les quelques lignes si au-dessus qui décrivent brièvement le comportement de du container sont comprises, il est dorénavant facile de comprendre que Spring s'appuie sur ce que vous décrivez dans votre code source afin d'adapter son comportement et de configurer votre application.
 
