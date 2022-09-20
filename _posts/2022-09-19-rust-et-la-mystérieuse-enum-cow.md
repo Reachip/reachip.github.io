@@ -8,7 +8,7 @@ share-img: /assets/img/annie-spratt2-lU4TuhmIKs4-unsplash.jpeg
 tags: [rust, programmation]
 ---
 
-Il arrive parfois que l’on veuille faire une opération couteuse que si cela est nécessaire. Rien ne vaut que quelques conditions triviales pour arriver cela, mais lorsque que l’on touche à des opérations évaluées au runtime, nous devons nous armer d’outil efficace.
+Il arrive parfois que l’on veuille faire une opération couteuse que si cela est nécessaire. Rien ne vaut que quelques conditions triviales pour arriver cela, mais lorsque que l’on touche à des opérations évaluées au runtime, nous devons nous armer d’outils efficaces.
 
 On pense notamment aux pointeurs intelligents quand il s’agit de modifier le comportement au runtime des mécanismes de gestion de la mémoire.
 
