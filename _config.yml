@@ -20,7 +20,7 @@ navbar-links:
 
 # Image to show in the navigation bar - works best with a square image
 # Remove this parameter if you don't want an image in the navbar
-avatar: "https://yt3.ggpht.com/ytc/AKedOLRheeAIqyeSZ6U_88iBb1LbB_Htijdw5CsrM_aU_w=s88-c-k-c0x00ffffff-no-rj"
+avatar: "https://avatars.githubusercontent.com/u/26501917?v=4"
 
 # By default, the image is cut into a circle. You can disable this behaviour by setting 'round-avatar: false'
 round-avatar: true
@@ -200,7 +200,7 @@ footer-hover-col: "#205375"
 
 # Ruby Date Format to show dates of posts
 date_format: "%d-%m-%Y"
-locale: 'fr-FR'
+locale: "fr-FR"
 # Facebook App ID
 #fb_app_id: ""
 
