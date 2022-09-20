@@ -8,7 +8,9 @@ share-img: /assets/img/annie-spratt2-lU4TuhmIKs4-unsplash.jpeg
 tags: [rust, programmation]
 ---
 
-Il arrive parfois en programmation que l'on veuille faire une opération couteuse que si nécessaire. Rien ne vaut que quelques conditions triviales pour arriver cela, mais lorsque que l'on touche à des opérations normalement évaluées au runtime, nous devons nous armer d’outil efficace. On pense notamment aux pointeurs intelligents quand il s’agit de modifier le comportement au runtime des mécanismes de gestion de la mémoire.
+Il arrive parfois en programmation que l'on veuille faire une opération couteuse que si nécessaire. Rien ne vaut que quelques conditions triviales pour arriver cela, mais lorsque que l'on touche à des opérations normalement évaluées au runtime, nous devons nous armer d’outil efficace.
+
+On pense notamment aux pointeurs intelligents quand il s’agit de modifier le comportement au runtime des mécanismes de gestion de la mémoire.
 
 Nous verrons un type de pointeur intelligent “clone-on-write” que propose Rust dans sa librairie standard appelé `Cow`. Un nom bien abstrait pour décrire un usage bien pratique des pointeurs intelligents dans la plupart des langages qui en possèdent.
 
