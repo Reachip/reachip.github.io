@@ -26,20 +26,20 @@ Elle porte le doux nom d'asynchronisme et derrière ce nom qui rend le concept p
 
 ## Dans un fast-food : l'équipier (intelligent) qui ne fait pas attendre les clients  
 
-Mise en contexte : Vous êtes équipier dans un fast-food pour financer je ne sais trop quoi, ou juste pour le fun si vous êtes masochiste. A midi c'est ce qu'on appelle dans le jargon le rush. Vous devez livré très rapidement les menus choisis par les clients affamés qui arrivent par centaine sous peine de vous faire virer parce que votre patron.e frustré.e à la limite du surpoids adore revendiquer son statut.
+Mise en contexte : Vous êtes équipier dans un fast-food pour financer je ne sais trop quoi, ou juste pour le fun si vous êtes masochiste. A midi c'est ce qu'on appelle dans le jargon le rush. Vous devez livrer très rapidement les menus choisis par les clients affamés qui arrivent par centaine sous peine de vous faire virer parce que votre patron.e frustré.e à la limite du surpoids adore revendiquer son statut.
 Le premier client arrive : il commande une grande frite et une boisson.
-Pas de soucis, vous faites chauffer la friteuse, puis pendant que la friteuse chauffe, vous allez cherché un gobelet puis vous faite couler la boisson.
+Pas de soucis, vous faites chauffer la friteuse, puis pendant que la friteuse chauffe, vous allez chercher un gobelet puis vous faite couler la boisson.
 Le deuxième client arrive : il commande un hamburger, une boisson est une grande frite.
-Vous faites chauffer la friteuse, puis pendant que la friteuse chauffe, vous allez cherché un gobelet puis vous faite couler la boisson, puis pendant que la boisson rempli le gobelet, vous préparez l'hamburger.
+Vous faites chauffer la friteuse, puis pendant que la friteuse chauffe, vous allez chercher un gobelet puis vous faite couler la boisson, puis pendant que la boisson rempli le gobelet, vous préparez l'hamburger.
 Évidement il y a encore le plateau à préparer, prendre la commande et j'en passe mais le topos est le même : Pendant qu'une tâche est en cours, on passe à une autre tâche et on revient quand la tâche en cours est terminé. C'est ce qui s'appelle être asynchrone.
-Imaginez si vous deviez attendre que les frites finissent de frire pour préparer la boisson, ça prendrait un temps fou.
+Imaginez si vous deviez attendre que les frites finissent de frire pour préparer la boisson, cela prendrait un temps fou.
 
 <div class="tenor-gif-embed" data-postid="5245140" data-share-method="host" data-width="100%" data-aspect-ratio="1.0"><a href="https://tenor.com/view/fastfood-chinese-fail-grab-icecream-gif-5245140">Fastfood Chinese GIF</a> from <a href="https://tenor.com/search/fastfood-gifs">Fastfood GIFs</a></div><script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 
 ## Dans votre programme : la procédure qui ne fait pas attendre l'utilisateur
-Cette façon de travailler, on peut la retrouver en informatique. C'est d'ailleurs ce qu'utilise tout les sites web à fort trafic comme Facebook ou Netflix.
+Cette façon de travailler, on peut la retrouver en informatique. C'est d'ailleurs ce qu'utilise tous les sites web à fort trafic comme Facebook ou Netflix.
 Et le schéma est relativement similaire comparé à celui d'un fast-food : Pendant qu'un client tente de se connecter sur mon site, je prend en charge un autre client.
-Si votre site est visité par votre grand-mère et votre mère une fois tous les deux mois ça serait inutile voir dégradant pour les performance.
+Si votre site est visité par votre votre mère une fois tous les deux mois, ça serait inutile voir dégradant pour les performances.
 
 Par contre si votre site est visité par des milliers d'utilisateurs chaque secondes comme pour le cas de Netflix, cela s'avère obligatoire.
 
@@ -64,8 +64,6 @@ Lire ou écrire dans un base de données et tout le reste.
 C'est tout ce qui concerne les tâches qui demandent de la puissance de calcul
 Traiter une image, trier une liste, comparer des fichiers, bref, les trucs de matheux.
 Dans ces domaines, l’asynchronisme ne sert à rien : Pour gagner en performance il faut utiliser les différents cœurs du processeur ou crée des threads et des processus.
-
-<div class="tenor-gif-embed" data-postid="5448795" data-share-method="host" data-width="100%" data-aspect-ratio="1.411764705882353"><a href="https://tenor.com/view/doug-math-mental-math-struggling-confused-gif-5448795">Trying To Calculate The Tip At A Restaurant GIF</a> from <a href="https://tenor.com/search/doug-gifs">Doug GIFs</a></div><script type="text/javascript" async src="https://tenor.com/embed.js"></script>
 
 ## Let's code
 
