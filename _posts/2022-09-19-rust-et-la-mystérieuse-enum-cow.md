@@ -2,9 +2,9 @@
 layout: post
 title: Rust et la mystérieuse enum "Cow"
 subtitle: All my life I was swinging for the fence, I was looking for the triple, Never playing good defense
-cover-img: /assets/img/annie-spratt2-lU4TuhmIKs4-unsplash.jpeg
-thumbnail-img: /assets/img/annie-spratt2-lU4TuhmIKs4-unsplash.jpeg
-share-img: /assets/img/annie-spratt2-lU4TuhmIKs4-unsplash.jpeg
+cover-img: /assets/img/sebastian-knoll-vNQ57VEqceY-unsplash.jpeg
+thumbnail-img: /assets/img/sebastian-knoll-vNQ57VEqceY-unsplash.jpeg
+share-img: /assets/img/sebastian-knoll-vNQ57VEqceY-unsplash.jpeg
 tags: [rust, programmation]
 ---
 
@@ -35,7 +35,8 @@ fn main() {
 }
 ```
 
-```
+```rust
+/* Traceback :
 error[E0382]: borrow of moved value: `brown`
 --> src/main.rs:18:22
 |
@@ -46,6 +47,7 @@ error[E0382]: borrow of moved value: `brown`
 17 |
 18 | println!("{:?}", brown);
 | ^^^^^ value borrowed here after move
+*/
 ```
 
 Maintenant, on sait que c'est l'ownership qui a tué M.Brown dans Reservoir Dog.

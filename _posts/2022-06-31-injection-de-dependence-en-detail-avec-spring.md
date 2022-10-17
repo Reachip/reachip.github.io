@@ -2,9 +2,9 @@
 layout: post
 title: L'inversion de contrôle en détail avec Spring
 subtitle: “Vous ne pouvez pas correctement traiter un problème tant que vous n'êtes pas correctement capables de le décrire.” - Jean-Marc Jancovici
-cover-img: /assets/img/kelly-sikkema-v9FQR4tbIq8-unsplash.jpeg
-thumbnail-img: /assets/img/kelly-sikkema-v9FQR4tbIq8-unsplash.jpeg
-share-img: /assets/img/kelly-sikkema-v9FQR4tbIq8-unsplash.jpeg
+cover-img: /assets/img/explosion_post-apocalyptic_nuclear_fog_imaginative_gotha_e2405fe0-d69a-4642-b789-1e5a1bd76b89.png
+thumbnail-img: /assets/img/explosion_post-apocalyptic_nuclear_fog_imaginative_gotha_e2405fe0-d69a-4642-b789-1e5a1bd76b89.png
+share-img: /assets/img/explosion_post-apocalyptic_nuclear_fog_imaginative_gotha_e2405fe0-d69a-4642-b789-1e5a1bd76b89.png
 tags: [conception, programmation, ioc, java]
 ---
 
@@ -12,24 +12,24 @@ On compare souvent la construction d'un programme écrit en programmation orient
 
 Aujourd'hui, nous nous intéresserons à la façon dont les architectes décident de bâtir les pièces de la maison et les contenus de la pièce. En d'autres termes, dans le jargon du logiciel, comment les objets sont injectés les uns aux autres d'une manière relativement optimisée grâce à l'usage de conteneur d'inversion de contrôle (IoC).
 
-Je tenterai d'expliquer ces concepts en codant une preuve de concept à l'aide du framework Spring. J'utiliserais le langage Kotlin afin de m'adresser au plus grand nombre d'entre vous, que vous veniez de l'écosystème Java ou autre. 
+Je tenterai d'expliquer ces concepts en codant une preuve de concept à l'aide du framework Spring. J'utiliserais le langage Kotlin afin de m'adresser au plus grand nombre d'entre vous, que vous veniez de l'écosystème Java ou autre.
 
 Kotlin est un langage orienté objet et fonctionnel, simple à lire et avec du sucre syntaxique. Il est aussi totalement compatible avec l'écosystème de la JVM, ce qui en fait un choix de remplacement ou de complément à Java.
 
 # L'inversion de contrôle ?
 
-> L'inversion de contrôle déplace les responsabilités secondaires depuis un objet vers d'autres objets qui sont dédiés à chaque responsabilité et respecte ainsi le 
-> principe de responsabilité unique. - Robert C. Martin 
+> L'inversion de contrôle déplace les responsabilités secondaires depuis un objet vers d'autres objets qui sont dédiés à chaque responsabilité et respecte ainsi le
+> principe de responsabilité unique. - Robert C. Martin
 
 En d'autres termes, l'inversion de contrôle est la capacité pour un objet de contenir un autre objet en tant que propriété afin d'utiliser ces méthodes exposées. On peut arriver à une telle pratique grâce à ce qu'on appelle l'injection de dépendance.
 
 La façon la plus commune d'injecter consiste à passer l'objet souhaité via le constructeur. Cette méthode convient dans la plupart des cas simples, mais s'avère inadapté lorsque le logiciel souhaite gagner en performance et que la complexité grandit.
 
-Admettons que les objets *A*, *B* et *C* requièrent l'injection d'un objet *Z*. Injecter une nouvelle copie d'objet *Z* à chacun des objets demande davantage de mémoire et de ressources au niveau du système. Chaque copie doit être indépendamment gérée.
+Admettons que les objets _A_, _B_ et _C_ requièrent l'injection d'un objet _Z_. Injecter une nouvelle copie d'objet _Z_ à chacun des objets demande davantage de mémoire et de ressources au niveau du système. Chaque copie doit être indépendamment gérée.
 
 Pour combler cette problématique, on pourrait injecter des objets dont les classes possèdent des méthodes et des propretés statiques ou encore faire du passage par référence. Ces deux options sont au mieux in-maintenables sur le long terme et au pire, source de conflit pour des programmes multi-thread.
 
-La solution la plus raisonnable est donc l'utilisation de container IOC. Ils permettent un haut niveau d'abstraction quant à l'injection optimisé de dépendance pour l'ensemble d'un programme. 
+La solution la plus raisonnable est donc l'utilisation de container IOC. Ils permettent un haut niveau d'abstraction quant à l'injection optimisé de dépendance pour l'ensemble d'un programme.
 
 # l'IOC avec Spring
 
@@ -44,6 +44,7 @@ interface Randomizer {
     fun getAsString(): String
 }
 ```
+
 Nous créerons ensuite deux générateurs : Un générateur d'UUID's aléatoire, puis un générateur de nombres aléatoire.
 
 ```kotlin
@@ -56,9 +57,9 @@ class RandomUUID : Randomizer {
 }
 ```
 
-## Niveau 1 : Injecter une classe et utiliser ces méthodes 
+## Niveau 1 : Injecter une classe et utiliser ces méthodes
 
-Afin d'utiliser le container de Spring sur les méthodes de la classe ```RandomUUID```, nous devons tout d'abord déclarer un contexte.
+Afin d'utiliser le container de Spring sur les méthodes de la classe `RandomUUID`, nous devons tout d'abord déclarer un contexte.
 
 ```kotlin
 internal class RandomUUIDScopeTest {
@@ -69,17 +70,14 @@ internal class RandomUUIDScopeTest {
 }
 ```
 
-Pour utiliser ces méthodes et configurer leurs comportements, il faut annoter ces méthodes comme étant des ```@Bean``` en décrivant leur comportement via l'usage de ```@Scope```. 
+Pour utiliser ces méthodes et configurer leurs comportements, il faut annoter ces méthodes comme étant des `@Bean` en décrivant leur comportement via l'usage de `@Scope`.
 
-
-Il y a deux principaux comportements pour une méthode dont la classe a été injectée : 
+Il y a deux principaux comportements pour une méthode dont la classe a été injectée :
 
 - Le comportement dit "singleton". Il permet de conserver le premier retour de la méthode appelante est le retour à chaque prochain appel.
 - Le comportement dit "prototype". Ce dernier exécute la fonction à chaque appel sans conserver le premier retour.
 
-
-Nous testerons ces deux comportements pour chacune des implémentations de l'interface ```Randomizer```. C'est pour cela que nous allons directement annoter ```@Bean``` pour une méthode qui aura le comportement "singleton" et un comportement "prototype".
-
+Nous testerons ces deux comportements pour chacune des implémentations de l'interface `Randomizer`. C'est pour cela que nous allons directement annoter `@Bean` pour une méthode qui aura le comportement "singleton" et un comportement "prototype".
 
 ```kotlin
 interface Randomizer {
@@ -104,7 +102,7 @@ interface Randomizer {
 }
 ```
 
-Testons maintenant le comportement "scope" via l'appel de la méthode ```getAsStringSingletonScope```.
+Testons maintenant le comportement "scope" via l'appel de la méthode `getAsStringSingletonScope`.
 On utilisera la méthode ``getBean()``` du contexte afin d'exécuter la méthode en bonne et due forme.
 
 ```kotlin
@@ -119,7 +117,6 @@ fun getAsStringSingletonScopeTest() {
     }
 }
 ```
-
 
 Une fois un premier appel effectué, on appel encore deux fois de suite la méthode, puis on constate que le retour reste le même alors que la méthode doit forcément retourner un seul et unique UUID à chaque fois. Cela et dû au comportement singleton décrit dans le code source de l'interface.
 
@@ -140,9 +137,9 @@ fun getAsStringPrototypeScopeTest() {
 
 On constate effectivement que chaque appel génère un UUID différent. Le premier appel n'est donc jamais stocké et est retourné à chaque nouveaux appels.
 
-## Niveau 2 : Injecter une classe dans une classe et utiliser ces méthodes 
+## Niveau 2 : Injecter une classe dans une classe et utiliser ces méthodes
 
-Nous allons créer une classe ```SysOutService``` qui va simplement se charger d'utiliser les ```Randomizer``` à disposition et d'afficher depuis la sortie standard. Nous devons par soucis de rigueur préciser à la JVM que cet objet implémente le comportement d'un ```Runnable```. L'objet aura la possibilité d'être exécuté via un thread. Plus d'informations ici : [https://docs.oracle.com/javase/7/docs/api/java/lang/Runnable.html](https://docs.oracle.com/javase/7/docs/api/java/lang/Runnable.html)
+Nous allons créer une classe `SysOutService` qui va simplement se charger d'utiliser les `Randomizer` à disposition et d'afficher depuis la sortie standard. Nous devons par soucis de rigueur préciser à la JVM que cet objet implémente le comportement d'un `Runnable`. L'objet aura la possibilité d'être exécuté via un thread. Plus d'informations ici : [https://docs.oracle.com/javase/7/docs/api/java/lang/Runnable.html](https://docs.oracle.com/javase/7/docs/api/java/lang/Runnable.html)
 
 ```kotlin
 class SysOutService(val randomizer: Randomizer) : Runnable {
@@ -150,7 +147,7 @@ class SysOutService(val randomizer: Randomizer) : Runnable {
 }
 ```
 
-L'objet ```SysOutService``` n'échappe pas à la règle, nous devons faire en sorte qu'il soit retourné en tant que Bean, à la nuance que cette fois-ci, il possède une dépendance à injecter, en l'occurrence, un ```Randomizer```.
+L'objet `SysOutService` n'échappe pas à la règle, nous devons faire en sorte qu'il soit retourné en tant que Bean, à la nuance que cette fois-ci, il possède une dépendance à injecter, en l'occurrence, un `Randomizer`.
 
 ```kotlin
 @Bean
@@ -179,9 +176,9 @@ output
 ee34babd-9f37-4a67-9b80-08527faed5bc
 ```
 
-Comment le container IOC a su qu'il devait injecter le bean randomUUIDBean ? En fait, Spring se base sûr ce que nous avons décrit. Ici, nous avons décrit dans notre code source un seul bean renvoyant un objet ```Randomizer``. Spring se base alors sur cette déclaration et n'en demande pas plus. 
+Comment le container IOC a su qu'il devait injecter le bean randomUUIDBean ? En fait, Spring se base sûr ce que nous avons décrit. Ici, nous avons décrit dans notre code source un seul bean renvoyant un objet ``Randomizer`. Spring se base alors sur cette déclaration et n'en demande pas plus.
 
-Nous pouvons bien-sûr écrire d'autre Bean renvoyant un objet ```Randomizer```et se montrer plus précis quant à ce que doit faire le container de Spring.
+Nous pouvons bien-sûr écrire d'autre Bean renvoyant un objet `Randomizer`et se montrer plus précis quant à ce que doit faire le container de Spring.
 
 ```kotlin
 @Bean
@@ -210,7 +207,7 @@ fun runTest() {
 }
 ```
 
-On peut par exemple utiliser l'annotation ```Primary```, qui permet de décrire l'utilisation de ce Bean en cas de choix ambigü à faire par le container.
+On peut par exemple utiliser l'annotation `Primary`, qui permet de décrire l'utilisation de ce Bean en cas de choix ambigü à faire par le container.
 
 # Avec Spring, il faut décrire afin de résoudre
 
