@@ -3,7 +3,7 @@ layout: page
 title: A propos de l'auteur
 ---
 
-Apprenti ingénieur chez Orange, j'ai rapidement fait de ma passion mon métier aux côtés de mes études, de mes contributions sur la plateforme GitHub et de mon blog.
+Apprenti ingénieur chez Orange rattaché à CPE Lyon, j'ai rapidement fait de ma passion mon métier aux côtés de mes études, de mes contributions sur la plateforme GitHub et de mon blog.
 
 Suivant la philosophie du softwarecraftsman, j'essaie de faire en sorte que mes compétences ne soient pas uniquement axées sur la connaissance d'une technologie, mais sur un ensemble de bonnes pratiques.
 
