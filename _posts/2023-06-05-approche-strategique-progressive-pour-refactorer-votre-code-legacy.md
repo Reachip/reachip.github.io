@@ -165,7 +165,7 @@ Comme nous l'avons vu, le pattern "strangler fig" repose sur la capacité à int
 
 ## Keep It Simple
 
-Strangler Fig permet de réduire les risques en remplaçant progressivement les fonctionnalités, en s'assurant que le nouveau système fonctionne correctement à chaque étape. C
+Strangler Fig permet de réduire les risques en remplaçant progressivement les fonctionnalités, en s'assurant que le nouveau système fonctionne correctement à chaque étape.
 
 A contrario, pour les systèmes plus petits et moins complexes, le coût et la complexité du remplacement complet peuvent être relativement faibles.
 
