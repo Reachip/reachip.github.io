@@ -8,7 +8,7 @@ share-img: /assets/img/shaun-darwood-TC6u_HnDDqs-unsplash.jpg
 tags: [refactoring, legacy]
 ---
 
-La gestion du code legacy a toujours été une étape cruciale dans le cycle de vie d'un logiciel. Souvent négligée, elle peut être repoussée jusqu'à ce que la dette technique devienne si importante qu'il devient impératif pour les développeurs en chef de prendre en charge cette problématique qui entrave toute amélioration du produit.
+La gestion du code legacy a toujours été une étape cruciale dans le cycle de vie d'un logiciel. Souvent négligée, elle peut être repoussée jusqu'à ce que la dette technique devienne si importante qu'il devient impératif pour les développeurs de prendre en charge cette problématique qui entrave toute amélioration du produit.
 
 Comme le grand secret de notre maladie oscille entre la précipitation et la négligence (comme dirait l'autre), la précipitation liées à l'urgence induit trop souvent à la négligence lorsque que l'on s'attaque à la dette technique.Beaucoup de développeurs trouvent compliquer de trouver un équilibre entre une action réfléchie et une attention minutieuse pour surmonter ces défis.
 
