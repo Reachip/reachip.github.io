@@ -10,7 +10,7 @@ tags: [refactoring, legacy]
 
 La gestion du code legacy a toujours été une étape cruciale dans le cycle de vie d'un logiciel. Souvent négligée, elle peut être repoussée jusqu'à ce que la dette technique devienne si importante qu'il devient impératif pour les développeurs en chef de prendre en charge cette problématique qui entrave toute amélioration du produit.
 
-Comme le grand secret de notre maladie oscille entre la précipitation et la négligence (comme dirait l'autre), la précipitation liées à l'urgence induit alors à la négligence, souvent présentes dans la gestion de cette problématique pouvant aggraver la dette technique. Beaucoup de développeurs trouvent compliquer de trouver un équilibre entre une action réfléchie et une attention minutieuse pour surmonter ces défis.
+Comme le grand secret de notre maladie oscille entre la précipitation et la négligence (comme dirait l'autre), la précipitation liées à l'urgence induit trop souvent à la négligence lorsque que l'on s'attaque à la dette technique.Beaucoup de développeurs trouvent compliquer de trouver un équilibre entre une action réfléchie et une attention minutieuse pour surmonter ces défis.
 
 Il nous faut alors un plan d'action global, conçu pour atteindre un objectif spécifique à long terme. Il faudra prendre des décisions clés et de mettre en œuvre des actions coordonnées pour maximiser les chances de succès dans la transformation de notre code legacy. En d'autres termes, mener à bien une stratégie.
 
@@ -30,7 +30,7 @@ Cette stratégie à plusieurs avantages :
 
 - **Utilisation des ressources existantes :** En utilisant le pattern Strangler Fig, les investissements déjà réalisés dans le système existant peuvent être réutilisés. Les ressources, telles que les bases de données, les infrastructures de déploiement, les intégrations, etc., peuvent être conservées et utilisées avec le nouveau système, réduisant ainsi les coûts associés à une refonte complète.
 
-- Approche itérative et adaptable : Le design pattern Strangler Fig suit une approche itérative, permettant des ajustements continus en fonction des besoins et des retours d'expérience. Cela facilite l'adaptation aux changements et aux évolutions du système, tout en minimisant les perturbations pour les utilisateurs et les opérations.
+- **Approche itérative et adaptable :** Le design pattern Strangler Fig suit une approche itérative, permettant des ajustements continus en fonction des besoins et des retours d'expérience. Cela facilite l'adaptation aux changements et aux évolutions du système, tout en minimisant les perturbations pour les utilisateurs et les opérations.
 
 On obtient alors approche progressive, souple et à moindre risque pour moderniser un système existant. Il permet de réduire les risques, d'améliorer la stabilité, de faciliter la coexistence harmonieuse des anciens et nouveaux systèmes, de favoriser la modularité et la scalabilité, de réutiliser les ressources existantes et de s'adapter de manière itérative aux changements.
 
@@ -56,11 +56,11 @@ Dans ce logiciel, on trouve les fonctionnalités suivantes :
 
 L'entreprise maintient painiblement sont logiciel depuis plusieurs années. Plusieurs éléments de l’infrastructure sont en phase décommissionnement. Par exemple, le support à l'ensemble des Interface Homme Machine (IHM), qui a été gelé en 2022, sera totalement arrêté en 2025. De même pour le bus de communication entre les IHM et la partie serveur.
 
-En outre, Compta & Ci veut revoir l'aspect saisie des transactions et rapports financiers de son logiciel tout en ameliorant la qualité de code de ces deux fonctionnalités majeurs de l'application.
+En somme, Compta & Ci veut revoir l'aspect saisie des transactions et rapports financiers de son logiciel tout en ameliorant la qualité de code de ces deux fonctionnalités majeurs de l'application.
 
-# Acte I : Identification des zones à moderniser
+# Identification des zones à moderniser
 
-Sur la base de l'analyse effectuée, on tout d'abord identifier les parties du code qui doivent être modernisées en raison de leur obsolescence, de leur mauvaise performance ou de leurs risques de sécurité. Ici, on souhaite repenser l'IHM qui était une application pour client lourd au profit d'une application web non-obselète et améliorant le confort des utlisateurs.
+Sur la base de l'analyse effectuée, nous devons tout d'abord identifier les parties du code qui doivent être modernisées en raison de leur obsolescence, de leur mauvaise performance ou de leurs risques de sécurité. Ici, on souhaite repenser l'IHM qui était une application pour client lourd au profit d'une application web non-obselète et améliorant le confort des utlisateurs.
 
 La saisie des transactions représente une très grosse partie du logiciel et est fréquemment modifié et lu par les développeurs. On suppose donc qu'un refactoring est nécessaire pour cette aspect. Il en va de même pour la partie "rapport financiers".
 
@@ -70,7 +70,7 @@ On aimerait ainsi effectuer l'action représenter ci-dessous. Le but étant de p
 
 ![Acte I de la startégie strangler fig](/assets/img/legacy-code-article/legacy-code-acte-1.png)
 
-# Acte II : Mise en place du pattern
+# Mise en place du pattern
 
 Une approche naif consisterait à directement liées les systèmes sain à la fois au système "legacy" et au nouveau système dit "moderne".
 
@@ -83,13 +83,11 @@ C'est généralement cette problèmatique qui pousse à refactorer rapidement et
 Le patttern Strangler Fig préconise d'éliminer ce problème en passant par une façade. Cette dernière isole les composants du système existant des changements et des dépendances introduits par les nouveaux composants. Elle intègre les nouvelles fonctionnalités ou services dans le système existant en fournissant une interface unifiée et permet aux composants existants de communiquer avec les nouvelles fonctionnalités, sans avoir à connaître les détails internes de ces dernières. On peut alors aisément faire cohabiter nos deux systèmes en cours de mutation.
 
 ```java
-// Interface pour la façade
 interface ComptaFacade {
     void enregistrerTransaction(Transaction transaction);
     void genererRapports();
 }
 
-// Implémentation de la façade
 class ComptaFacadeImpl implements ComptaFacade {
     private ModuleEnregistrementTransaction moduleEnregistrementTransaction;
     private ModuleRapportsFinanciers moduleRapportsFinanciers;
@@ -108,26 +106,20 @@ class ComptaFacadeImpl implements ComptaFacade {
     }
 }
 
-// Module d'enregistrement des transactions
 class ModuleEnregistrementTransaction {
     public void enregistrer(Transaction transaction) {
-        // Implémentation de la logique d'enregistrement des transactions
         // ...
     }
 }
 
-// Module de génération de rapports financiers
 class ModuleRapportsFinanciers {
     public void genererRapports() {
-        // Implémentation de la logique de génération des rapports financiers
         // ...
     }
 }
 
-// Classe Transaction
 class Transaction {
-    // Attributs et méthodes associés à la transaction
-    // ...
+
 }
 ```
 
@@ -135,11 +127,9 @@ On peut utiliser la façade comme suit :
 
 ```java
 ComptaFacade facade = new ComptaFacadeImpl();
-
-// Exemple d'utilisation de la façade
 Transaction transaction = new Transaction();
-facade.enregistrerTransaction(transaction);
 
+facade.enregistrerTransaction(transaction);
 facade.genererRapports();
 ```
 
@@ -169,11 +159,11 @@ Une fois que tous les tests passent, on peut alors supprimer la facade et direct
 
 On identifie deux situations où l'utilisation du pattern peut ne pas être appropriée.
 
-# Incapacité d'exposer le système
+## Incapacité d'exposer le système
 
 Comme nous l'avons vu, le pattern "strangler fig" repose sur la capacité à intercepter les requêtes provenant de l'ancien système et à les rediriger vers la nouvelle version. Cependant, dans certains cas, il peut être difficile ou même impossible d'intercepter ces requêtes selon le SI ou évolue une application.
 
-# Keep It Simple
+## Keep It Simple
 
 Strangler Fig permet de réduire les risques en remplaçant progressivement les fonctionnalités, en s'assurant que le nouveau système fonctionne correctement à chaque étape. C
 
